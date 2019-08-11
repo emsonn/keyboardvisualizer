@@ -14,12 +14,11 @@ root.geometry("+{}+{}".format(top_right, DOWN))
 
 # Window sizing
 canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
-canvas.pack()
 
 # Image loading + adding
 filename = PhotoImage(file = "../images/minidox.png")
 background_picture = Label(root, image=filename)
-background_picture.place(x=0, y=0, relwidth=1, relheight=1)
+background_picture.place(relwidth=1, relheight=1)
 
 canvas.pack()
 
