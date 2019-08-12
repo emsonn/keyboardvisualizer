@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import PhotoImage, Label
 
 HEIGHT = 210
 WIDTH = 510
@@ -16,11 +15,12 @@ root.geometry("+{}+{}".format(top_right, DOWN))
 canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
 
 # Image loading + adding
-filename = PhotoImage(file = "../images/minidox.png")
-background_picture = Label(root, image=filename)
+filename = tk.PhotoImage(file = "../images/minidox.png")
+background_picture = tk.Label(root, image=filename)
 background_picture.place(relwidth=1, relheight=1)
 
 canvas.pack()
+
 
 
 root.mainloop()
