@@ -1,4 +1,3 @@
-# root.title("Keyboard Visualizer")
 import tkinter as tk
 
 HEIGHT = 210
