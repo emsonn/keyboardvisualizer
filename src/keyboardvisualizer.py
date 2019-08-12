@@ -1,3 +1,4 @@
+# root.title("Keyboard Visualizer")
 import tkinter as tk
 
 HEIGHT = 210
@@ -6,6 +7,7 @@ DOWN = 0
 
 # Window initialization
 root = tk.Tk()
+root.title("Keyboard Visualizer")
 
 # Window placement
 top_right = root.winfo_screenwidth()
