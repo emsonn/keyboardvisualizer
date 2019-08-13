@@ -1,10 +1,15 @@
 import tkinter as tk
 
+HEIGHT = 210
+WIDTH = 510
+DOWN = 0
+
 def on_return(event):
 	print("Return Pressed")
 
 def on_a_press(event):
 	print("a Pressed")
+	id = canvas.create_rectangle(50, 0, 100, 50, fill='red')
 
 def on_b_press(event):
 	print("b Pressed")
@@ -81,9 +86,6 @@ def on_y_press(event):
 def on_z_press(event):
 	print("z Pressed")
 
-HEIGHT = 210
-WIDTH = 510
-DOWN = 0
 
 # Window initialization
 root = tk.Tk()
@@ -97,8 +99,9 @@ root.geometry("+{}+{}".format(top_right, DOWN))
 canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
 
 # Image loading + adding
-filename = tk.PhotoImage(file = "../images/minidox.png")
-background_picture = tk.Label(root, image=filename)
+img_path = "../images/minidox.png"
+img = tk.PhotoImage(file=img_path)
+background_picture = tk.Label(root, image=img)
 background_picture.place(relwidth=1, relheight=1)
 
 canvas.pack()
@@ -131,7 +134,7 @@ root.bind("x", on_x_press)
 root.bind("y", on_y_press)
 root.bind("z", on_z_press)
 
-
+# l = canvas.create_oval(20, 20, 100, 100, fill="red")
 
 
 root.mainloop()
