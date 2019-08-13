@@ -1,15 +1,24 @@
 import tkinter as tk
+from PIL import ImageTk
 
-HEIGHT = 210
-WIDTH = 510
+W_HEIGHT = 210
+W_WIDTH = 510
 DOWN = 0
+I_HEIGHT = 108
+I_WIDTH = 257
+
+A_X1 = 7
+A_Y1 = 62
+A_X2 = 48
+A_Y2 = 100
+
 
 def on_return(event):
 	print("Return Pressed")
 
 def on_a_press(event):
 	print("a Pressed")
-	id = canvas.create_rectangle(50, 0, 100, 50, fill='red')
+	id = canvas.create_rectangle(A_X1, A_Y1, A_X2, A_Y2, fill='red')
 
 def on_b_press(event):
 	print("b Pressed")
@@ -92,7 +101,7 @@ root = tk.Tk()
 root.title("Keyboard Visualizer")
 
 # Keep keyboard visualizer in front of every window
-root.lift()
+# root.lift()
 root.attributes("-topmost", True)
 
 # Window placement
@@ -100,13 +109,16 @@ top_right = root.winfo_screenwidth()
 root.geometry("+{}+{}".format(top_right, DOWN))
 
 # Window sizing
-canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
+canvas = tk.Canvas(root, height=W_HEIGHT, width=W_WIDTH)
 
 # Image loading + adding
 img_path = "../images/minidox.png"
-img = tk.PhotoImage(file=img_path)
-background_picture = tk.Label(root, image=img)
-background_picture.place(relwidth=1, relheight=1)
+img = ImageTk.PhotoImage(file=img_path)
+# background_picture = tk.Label(root, image=img)
+# background_picture = tk.Canvas.create_image(root, image=img)
+# background_picture.place(relwidth=1, relheight=1)
+canvas.create_image(I_WIDTH, I_HEIGHT, image = img)
+
 
 canvas.pack()
 
