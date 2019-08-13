@@ -91,6 +91,10 @@ def on_z_press(event):
 root = tk.Tk()
 root.title("Keyboard Visualizer")
 
+# Keep keyboard visualizer in front of every window
+root.lift()
+root.attributes("-topmost", True)
+
 # Window placement
 top_right = root.winfo_screenwidth()
 root.geometry("+{}+{}".format(top_right, DOWN))
