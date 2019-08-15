@@ -1,30 +1,56 @@
 import tkinter as tk
 from PIL import ImageTk
 
-W_HEIGHT = 210
-W_WIDTH = 510
-DOWN = 0
-I_HEIGHT = 108
-I_WIDTH = 257
+WINDOW_HEIGHT = 210
+WINDOW_WIDTH = 510
+OFFSET_DOWN = 0
+INSIDE_OFFSET_HEIGHT = 108
+INSIDE_OFFSET_WIDTH = 257
 
-A_X1 = 7
-A_Y1 = 62
-A_X2 = 48
-A_Y2 = 100
+S_X1 = 49
+S_Y1 = 51
+S_X2 = 87
+S_Y2 = 89
 
+C_X1 = 89
+C_Y1 = 87
+C_X2 = 127
+C_Y2 = 124
+
+root = tk.Tk()
+root.title("Keyboard Visualizer")
+
+root.attributes("-topmost", True)
+
+top_right_dimension = root.winfo_screenwidth()
+root.geometry("+{}+{}".format(top_right_dimension, OFFSET_DOWN))
+
+c = tk.Canvas(root, height=WINDOW_HEIGHT, width=WINDOW_WIDTH)
+
+img_path = "../images/minidox.png"
+img = ImageTk.PhotoImage(file=img_path)
+
+c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
+c.pack()
+
+def red_letter_box(x1, y1, x2, y2):
+	return c.create_rectangle(x1, y1, x2, y2, fill="red")
 
 def on_return(event):
 	print("Return Pressed")
 
 def on_a_press(event):
 	print("a Pressed")
-	id = canvas.create_rectangle(A_X1, A_Y1, A_X2, A_Y2, fill='red')
 
 def on_b_press(event):
 	print("b Pressed")
 
 def on_c_press(event):
-	print("c Pressed")
+	c.delete("all")
+	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
+	print("Key pressed: c")
+
+	box = red_letter_box(C_X1, C_Y1, C_X2, C_Y2)
 
 def on_d_press(event):
 	print("d Pressed")
@@ -72,7 +98,11 @@ def on_r_press(event):
 	print("r Pressed")
 
 def on_s_press(event):
-	print("s Pressed")
+	c.delete("all")
+	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
+	print("Key pressed: s")
+
+	box = red_letter_box(S_X1, S_Y1, S_X2, S_Y2)
 
 def on_t_press(event):
 	print("t Pressed")
@@ -95,62 +125,35 @@ def on_y_press(event):
 def on_z_press(event):
 	print("z Pressed")
 
+def main():
+	root.bind("<Return>", on_return)
+	root.bind("a", on_a_press)
+	root.bind("b", on_b_press)
+	root.bind("c", on_c_press)
+	root.bind("d", on_d_press)
+	root.bind("e", on_e_press)
+	root.bind("f", on_f_press)
+	root.bind("g", on_g_press)
+	root.bind("h", on_h_press)
+	root.bind("i", on_i_press)
+	root.bind("j", on_j_press)
+	root.bind("k", on_k_press)
+	root.bind("l", on_l_press)
+	root.bind("m", on_m_press)
+	root.bind("n", on_n_press)
+	root.bind("o", on_o_press)
+	root.bind("p", on_p_press)
+	root.bind("q", on_q_press)
+	root.bind("r", on_r_press)
+	root.bind("s", on_s_press)
+	root.bind("t", on_t_press)
+	root.bind("u", on_u_press)
+	root.bind("v", on_v_press)
+	root.bind("w", on_w_press)
+	root.bind("x", on_x_press)
+	root.bind("y", on_y_press)
+	root.bind("z", on_z_press)
 
-# Window initialization
-root = tk.Tk()
-root.title("Keyboard Visualizer")
+	root.mainloop()
 
-# Keep keyboard visualizer in front of every window
-# root.lift()
-root.attributes("-topmost", True)
-
-# Window placement
-top_right = root.winfo_screenwidth()
-root.geometry("+{}+{}".format(top_right, DOWN))
-
-# Window sizing
-canvas = tk.Canvas(root, height=W_HEIGHT, width=W_WIDTH)
-
-# Image loading + adding
-img_path = "../images/minidox.png"
-img = ImageTk.PhotoImage(file=img_path)
-# background_picture = tk.Label(root, image=img)
-# background_picture = tk.Canvas.create_image(root, image=img)
-# background_picture.place(relwidth=1, relheight=1)
-canvas.create_image(I_WIDTH, I_HEIGHT, image = img)
-
-
-canvas.pack()
-
-root.bind("<Return>", on_return)
-root.bind("a", on_a_press)
-root.bind("b", on_b_press)
-root.bind("c", on_c_press)
-root.bind("d", on_d_press)
-root.bind("e", on_e_press)
-root.bind("f", on_f_press)
-root.bind("g", on_g_press)
-root.bind("h", on_h_press)
-root.bind("i", on_i_press)
-root.bind("j", on_j_press)
-root.bind("k", on_k_press)
-root.bind("l", on_l_press)
-root.bind("m", on_m_press)
-root.bind("n", on_n_press)
-root.bind("o", on_o_press)
-root.bind("p", on_p_press)
-root.bind("q", on_q_press)
-root.bind("r", on_r_press)
-root.bind("s", on_s_press)
-root.bind("t", on_t_press)
-root.bind("u", on_u_press)
-root.bind("v", on_v_press)
-root.bind("w", on_w_press)
-root.bind("x", on_x_press)
-root.bind("y", on_y_press)
-root.bind("z", on_z_press)
-
-# l = canvas.create_oval(20, 20, 100, 100, fill="red")
-
-
-root.mainloop()
+main()
