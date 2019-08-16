@@ -6,16 +6,37 @@ WINDOW_WIDTH = 510
 OFFSET_DOWN = 0
 INSIDE_OFFSET_HEIGHT = 108
 INSIDE_OFFSET_WIDTH = 257
+DEFAULT_COLOR = "red"
 
-S_X1 = 49
-S_Y1 = 51
-S_X2 = 87
-S_Y2 = 89
+# x1, y1, x2, y2
+Q_KEY = (8, 21, 47, 60)
+W_KEY = (49, 11, 87, 50)
+E_KEY = (89, 6, 127, 44)
+R_KEY = ()
+T_KEY = ()
+Y_KEY = ()
+U_KEY = () 
+I_KEY = ()
+O_KEY = ()
+P_KEY = () 
 
-C_X1 = 89
-C_Y1 = 87
-C_X2 = 127
-C_Y2 = 124
+A_KEY = () 
+S_KEY = (49, 51, 87, 90)
+D_KEY = (89, 45, 127, 85)
+F_KEY = ()
+G_KEY = ()
+H_KEY = ()
+J_KEY = () 
+K_KEY = ()
+L_KEY = () 
+
+Z_KEY = ()
+X_KEY = (49, 91, 87, 130)
+C_KEY = (89, 86, 127, 124)
+V_KEY = ()
+B_KEY = ()
+N_KEY = ()
+M_KEY = ()
 
 root = tk.Tk()
 root.title("Keyboard Visualizer")
@@ -33,8 +54,10 @@ img = ImageTk.PhotoImage(file=img_path)
 c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
 c.pack()
 
-def red_letter_box(x1, y1, x2, y2):
-	return c.create_rectangle(x1, y1, x2, y2, fill="red")
+def red_letter_box(key_coords):
+	return c.create_rectangle(key_coords[0], key_coords[1], 
+								key_coords[2], key_coords[3], 
+								fill=DEFAULT_COLOR)
 
 def on_return(event):
 	print("Return Pressed")
@@ -50,13 +73,21 @@ def on_c_press(event):
 	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
 	print("Key pressed: c")
 
-	box = red_letter_box(C_X1, C_Y1, C_X2, C_Y2)
+	box = red_letter_box(C_KEY)
 
 def on_d_press(event):
-	print("d Pressed")
+	c.delete("all")
+	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
+	print("Key pressed: d")
+
+	box = red_letter_box(D_KEY)
 
 def on_e_press(event):
-	print("e Pressed")
+	c.delete("all")
+	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
+	print("Key pressed: e")
+
+	box = red_letter_box(E_KEY)
 
 def on_f_press(event):
 	print("f Pressed")
@@ -92,7 +123,11 @@ def on_p_press(event):
 	print("p Pressed")
 
 def on_q_press(event):
-	print("q Pressed")
+	c.delete("all")
+	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
+	print("Key pressed: q")
+
+	box = red_letter_box(Q_KEY)
 
 def on_r_press(event):
 	print("r Pressed")
@@ -102,7 +137,7 @@ def on_s_press(event):
 	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
 	print("Key pressed: s")
 
-	box = red_letter_box(S_X1, S_Y1, S_X2, S_Y2)
+	box = red_letter_box(S_KEY)
 
 def on_t_press(event):
 	print("t Pressed")
@@ -114,10 +149,19 @@ def on_v_press(event):
 	print("v Pressed")
 
 def on_w_press(event):
-	print("w Pressed")
+	c.delete("all")
+	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
+	print("Key pressed: w")
+
+	box = red_letter_box(W_KEY)
 
 def on_x_press(event):
+	c.delete("all")
+	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
 	print("x Pressed")
+
+	box = red_letter_box(X_KEY)
+
 
 def on_y_press(event):
 	print("y Pressed")
