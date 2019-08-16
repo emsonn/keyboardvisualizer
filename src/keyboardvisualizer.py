@@ -12,29 +12,29 @@ DEFAULT_COLOR = "red"
 Q_KEY = (8, 21, 47, 60)
 W_KEY = (49, 11, 87, 50)
 E_KEY = (89, 6, 127, 44)
-R_KEY = ()
-T_KEY = ()
+R_KEY = (130, 11, 167, 50)
+T_KEY = (170, 16, 208, 54)
 Y_KEY = ()
 U_KEY = () 
 I_KEY = ()
 O_KEY = ()
 P_KEY = () 
 
-A_KEY = (8, 23, 47, 62) 
+A_KEY = (8, 61, 47, 100) 
 S_KEY = (49, 51, 87, 90)
 D_KEY = (89, 45, 127, 85)
-F_KEY = ()
-G_KEY = ()
+F_KEY = (130, 51, 167, 90)
+G_KEY = (170, 56, 208, 95)
 H_KEY = ()
 J_KEY = () 
 K_KEY = ()
 L_KEY = () 
 
-Z_KEY = (8, 64, 47, 103)
+Z_KEY = (8, 101, 47, 140)
 X_KEY = (49, 91, 87, 130)
 C_KEY = (89, 86, 127, 124)
-V_KEY = ()
-B_KEY = ()
+V_KEY = (130, 91, 167, 130)
+B_KEY = (170, 97, 208, 134)
 N_KEY = ()
 M_KEY = ()
 
@@ -73,36 +73,37 @@ def on_return(event):
 def on_a_press(event):
 	print_key('a')
 	reset_canvas()
+	red_letter_box(A_KEY)
 
 def on_b_press(event):
 	print_key('b')
 	reset_canvas()
+	red_letter_box(B_KEY)
 
 def on_c_press(event):
 	print_key('c')
 	reset_canvas()
-
-	box = red_letter_box(C_KEY)
+	red_letter_box(C_KEY)
 
 def on_d_press(event):
 	print_key('d')
 	reset_canvas()
-
-	box = red_letter_box(D_KEY)
+	red_letter_box(D_KEY)
 
 def on_e_press(event):
 	print_key('e')	
 	reset_canvas()
-
-	box = red_letter_box(E_KEY)
+	red_letter_box(E_KEY)
 
 def on_f_press(event):
 	print_key('f')
 	reset_canvas()
+	red_letter_box(F_KEY)
 
 def on_g_press(event):
 	print_key('g')
 	reset_canvas()
+	red_letter_box(G_KEY)
 
 def on_h_press(event):
 	print_key('h')
@@ -143,22 +144,22 @@ def on_p_press(event):
 def on_q_press(event):
 	print_key('q')
 	reset_canvas()
-
-	box = red_letter_box(Q_KEY)
+	red_letter_box(Q_KEY)
 
 def on_r_press(event):
 	print_key('r')
 	reset_canvas()
+	red_letter_box(R_KEY)
 
 def on_s_press(event):
 	print_key('s')
 	reset_canvas()
-
-	box = red_letter_box(S_KEY)
+	red_letter_box(S_KEY)
 
 def on_t_press(event):
 	print_key('t')
 	reset_canvas()
+	red_letter_box(T_KEY)
 
 def on_u_press(event):
 	print_key('u')
@@ -167,18 +168,17 @@ def on_u_press(event):
 def on_v_press(event):
 	print_key('v')
 	reset_canvas()
+	red_letter_box(V_KEY)
 
 def on_w_press(event):
 	print_key('w')
 	reset_canvas()
-
-	box = red_letter_box(W_KEY)
+	red_letter_box(W_KEY)
 
 def on_x_press(event):
 	print_key('x')
 	reset_canvas()
-
-	box = red_letter_box(X_KEY)
+	red_letter_box(X_KEY)
 
 def on_y_press(event):
 	print_key('y')
@@ -187,6 +187,7 @@ def on_y_press(event):
 def on_z_press(event):
 	print_key('z')
 	reset_canvas()
+	red_letter_box(Z_KEY)
 
 def main():
 	root.bind("<Return>", on_return)
