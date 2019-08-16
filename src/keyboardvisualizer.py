@@ -58,174 +58,7 @@ img = ImageTk.PhotoImage(file=img_path)
 c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
 c.pack()
 
-
-def reset_canvas():
-	c.delete("all")
-	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
-
-def red_letter_box(key_coords):
-	return c.create_rectangle(key_coords[0], key_coords[1], 
-								key_coords[2], key_coords[3], 
-								fill=DEFAULT_COLOR)
-
-def print_key(char):
-	print("Key pressed: " + char)
-
-def on_q_press(event):
-	print_key('q')
-	reset_canvas()
-	red_letter_box(Q_KEY)
-
-def on_w_press(event):
-	print_key('w')
-	reset_canvas()
-	red_letter_box(W_KEY)
-
-def on_e_press(event):
-	print_key('e')	
-	reset_canvas()
-	red_letter_box(E_KEY)
-
-def on_r_press(event):
-	print_key('r')
-	reset_canvas()
-	red_letter_box(R_KEY)
-
-def on_t_press(event):
-	print_key('t')
-	reset_canvas()
-	red_letter_box(T_KEY)
-
-def on_y_press(event):
-	print_key('y')
-	reset_canvas()
-	red_letter_box(Y_KEY)
-
-def on_u_press(event):
-	print_key('u')
-	reset_canvas()
-	red_letter_box(U_KEY)
-
-def on_i_press(event):
-	print_key('i')
-	reset_canvas()
-	red_letter_box(I_KEY)
-
-def on_o_press(event):
-	print_key('o')
-	reset_canvas()
-	red_letter_box(O_KEY)
-
-def on_p_press(event):
-	print_key('p')
-	reset_canvas()
-	red_letter_box(P_KEY)
-
-# ========================
-
-def on_a_press(event):
-	print_key('a')
-	reset_canvas()
-	red_letter_box(A_KEY)
-
-def on_s_press(event):
-	print_key('s')
-	reset_canvas()
-	red_letter_box(S_KEY)
-
-def on_d_press(event):
-	print_key('d')
-	reset_canvas()
-	red_letter_box(D_KEY)
-
-def on_f_press(event):
-	print_key('f')
-	reset_canvas()
-	red_letter_box(F_KEY)
-
-def on_g_press(event):
-	print_key('g')
-	reset_canvas()
-	red_letter_box(G_KEY)
-
-def on_h_press(event):
-	print_key('h')
-	reset_canvas()
-	red_letter_box(H_KEY)
-
-def on_j_press(event):
-	print_key('j')
-	reset_canvas()
-	red_letter_box(J_KEY)
-
-def on_k_press(event):
-	print_key('k')
-	reset_canvas()
-	red_letter_box(K_KEY)
-
-def on_l_press(event):
-	print_key('l')
-	reset_canvas()
-	red_letter_box(L_KEY)
-
-def on_semicolon_press(event):
-	print_key("semicolon")
-	reset_canvas()
-	red_letter_box(SEMICOLON_KEY)
-
-# ========================
-
-def on_z_press(event):
-	print_key('z')
-	reset_canvas()
-	red_letter_box(Z_KEY)
-
-def on_x_press(event):
-	print_key('x')
-	reset_canvas()
-	red_letter_box(X_KEY)
-
-def on_c_press(event):
-	print_key('c')
-	reset_canvas()
-	red_letter_box(C_KEY)
-
-def on_v_press(event):
-	print_key('v')
-	reset_canvas()
-	red_letter_box(V_KEY)
-
-def on_b_press(event):
-	print_key('b')
-	reset_canvas()
-	red_letter_box(B_KEY)
-
-def on_n_press(event):
-	print_key('n')
-	reset_canvas()
-	red_letter_box(N_KEY)
-
-def on_m_press(event):
-	print_key('m')
-	reset_canvas()
-	red_letter_box(M_KEY)
-
-def on_comma_press(event):
-	print_key("comma")
-	reset_canvas()
-	red_letter_box(COMMA_KEY)
-
-def on_period_press(event):
-	print_key("period")
-	reset_canvas()
-	red_letter_box(PERIOD_KEY)
-
-def on_forwardslash_press(event):
-	print_key("forward slash")
-	reset_canvas()
-	red_letter_box(FORWARDSLASH_KEY)
-
-def main():
+def listen_for_keyboard():
 	root.bind('Q', on_q_press)
 	root.bind('W', on_w_press)
 	root.bind('E', on_e_press)
@@ -288,6 +121,120 @@ def main():
 	root.bind(',', on_comma_press)
 	root.bind('.', on_period_press)
 	root.bind('/', on_forwardslash_press)
+
+def reset_canvas():
+	c.delete("all")
+	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
+
+def red_letter_box(key_coords):
+	return c.create_rectangle(key_coords[0], key_coords[1], 
+								key_coords[2], key_coords[3], 
+								fill=DEFAULT_COLOR)
+
+def print_key(key):
+	print("Key pressed: " + key)
+
+def visualize_keyboard(key, keycode):
+	print_key(key)
+	reset_canvas()
+	red_letter_box(keycode)
+
+def on_q_press(event):
+	visualize_keyboard('q', Q_KEY)
+
+def on_w_press(event):
+	visualize_keyboard('w', W_KEY)
+
+def on_e_press(event):
+	visualize_keyboard('e', E_KEY)
+
+def on_r_press(event):
+	visualize_keyboard('r', R_KEY)
+
+def on_t_press(event):
+	visualize_keyboard('t', T_KEY)
+
+def on_y_press(event):
+	visualize_keyboard('y', Y_KEY)
+
+def on_u_press(event):
+	visualize_keyboard('u', U_KEY)
+
+def on_i_press(event):
+	visualize_keyboard('i', I_KEY)
+
+def on_o_press(event):
+	visualize_keyboard('o', O_KEY)
+
+def on_p_press(event):
+	visualize_keyboard('p', P_KEY)
+
+# ========================
+
+def on_a_press(event):
+	visualize_keyboard('a', A_KEY)
+
+def on_s_press(event):
+	visualize_keyboard('s', S_KEY)
+
+def on_d_press(event):
+	visualize_keyboard('d', D_KEY)
+
+def on_f_press(event):
+	visualize_keyboard('f', F_KEY)
+
+def on_g_press(event):
+	visualize_keyboard('g', G_KEY)
+
+def on_h_press(event):
+	visualize_keyboard('h', H_KEY)
+
+def on_j_press(event):
+	visualize_keyboard('j', J_KEY)
+
+def on_k_press(event):
+	visualize_keyboard('k', K_KEY)
+
+def on_l_press(event):
+	visualize_keyboard('l', L_KEY)
+
+def on_semicolon_press(event):
+	visualize_keyboard('semicolon', SEMICOLON_KEY)
+
+# ========================
+
+def on_z_press(event):
+	visualize_keyboard('z', Z_KEY)
+
+def on_x_press(event):
+	visualize_keyboard('x', X_KEY)
+
+def on_c_press(event):
+	visualize_keyboard('c', C_KEY)
+
+def on_v_press(event):
+	visualize_keyboard('v', V_KEY)
+
+def on_b_press(event):
+	visualize_keyboard('b', B_KEY)
+
+def on_n_press(event):
+	visualize_keyboard('n', N_KEY)
+
+def on_m_press(event):
+	visualize_keyboard('m', M_KEY)
+
+def on_comma_press(event):
+	visualize_keyboard(',', COMMA_KEY)
+
+def on_period_press(event):
+	visualize_keyboard('.', PERIOD_KEY)
+
+def on_forwardslash_press(event):
+	visualize_keyboard('/', FORWARDSLASH_KEY)
+
+def main():
+	listen_for_keyboard()
 
 	root.mainloop()
 
