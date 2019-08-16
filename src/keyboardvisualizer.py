@@ -52,7 +52,7 @@ root.geometry("+{}+{}".format(top_right_dimension, OFFSET_DOWN))
 
 c = tk.Canvas(root, height=WINDOW_HEIGHT, width=WINDOW_WIDTH)
 
-img_path = "../images/minidox.png"
+img_path = "../images/minidox-primary-layer.png"
 img = ImageTk.PhotoImage(file=img_path)
 
 c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
