@@ -20,7 +20,7 @@ I_KEY = ()
 O_KEY = ()
 P_KEY = () 
 
-A_KEY = () 
+A_KEY = (8, 23, 47, 62) 
 S_KEY = (49, 51, 87, 90)
 D_KEY = (89, 45, 127, 85)
 F_KEY = ()
@@ -30,7 +30,7 @@ J_KEY = ()
 K_KEY = ()
 L_KEY = () 
 
-Z_KEY = ()
+Z_KEY = (8, 64, 47, 103)
 X_KEY = (49, 91, 87, 130)
 C_KEY = (89, 86, 127, 124)
 V_KEY = ()
@@ -54,120 +54,139 @@ img = ImageTk.PhotoImage(file=img_path)
 c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
 c.pack()
 
+
+def reset_canvas():
+	c.delete("all")
+	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
+
 def red_letter_box(key_coords):
 	return c.create_rectangle(key_coords[0], key_coords[1], 
 								key_coords[2], key_coords[3], 
 								fill=DEFAULT_COLOR)
 
+def print_key(char):
+	print("Key pressed: " + char)
+
 def on_return(event):
 	print("Return Pressed")
 
 def on_a_press(event):
-	print("a Pressed")
+	print_key('a')
+	reset_canvas()
 
 def on_b_press(event):
-	print("b Pressed")
+	print_key('b')
+	reset_canvas()
 
 def on_c_press(event):
-	c.delete("all")
-	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
-	print("Key pressed: c")
+	print_key('c')
+	reset_canvas()
 
 	box = red_letter_box(C_KEY)
 
 def on_d_press(event):
-	c.delete("all")
-	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
-	print("Key pressed: d")
+	print_key('d')
+	reset_canvas()
 
 	box = red_letter_box(D_KEY)
 
 def on_e_press(event):
-	c.delete("all")
-	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
-	print("Key pressed: e")
+	print_key('e')	
+	reset_canvas()
 
 	box = red_letter_box(E_KEY)
 
 def on_f_press(event):
-	print("f Pressed")
+	print_key('f')
+	reset_canvas()
 
 def on_g_press(event):
-	print("g Pressed")
+	print_key('g')
+	reset_canvas()
 
 def on_h_press(event):
-	print("h Pressed")
+	print_key('h')
+	reset_canvas()
 
 def on_i_press(event):
-	print("i Pressed")
+	print_key('i')
+	reset_canvas()
 
 def on_j_press(event):
-	print("j Pressed")
+	print_key('j')
+	reset_canvas()
 
 def on_k_press(event):
-	print("k Pressed")
+	print_key('k')
+	reset_canvas()
 
 def on_l_press(event):
-	print("l Pressed")
+	print_key('l')
+	reset_canvas()
 
 def on_m_press(event):
-	print("m Pressed")
+	print_key('m')
+	reset_canvas()
 
 def on_n_press(event):
-	print("n Pressed")
+	print_key('n')
+	reset_canvas()
 
 def on_o_press(event):
-	print("o Pressed")
+	print_key('o')
+	reset_canvas()
 
 def on_p_press(event):
-	print("p Pressed")
+	print_key('p')
+	reset_canvas()
 
 def on_q_press(event):
-	c.delete("all")
-	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
-	print("Key pressed: q")
+	print_key('q')
+	reset_canvas()
 
 	box = red_letter_box(Q_KEY)
 
 def on_r_press(event):
-	print("r Pressed")
+	print_key('r')
+	reset_canvas()
 
 def on_s_press(event):
-	c.delete("all")
-	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
-	print("Key pressed: s")
+	print_key('s')
+	reset_canvas()
 
 	box = red_letter_box(S_KEY)
 
 def on_t_press(event):
-	print("t Pressed")
+	print_key('t')
+	reset_canvas()
 
 def on_u_press(event):
-	print("u Pressed")
+	print_key('u')
+	reset_canvas()
 
 def on_v_press(event):
-	print("v Pressed")
+	print_key('v')
+	reset_canvas()
 
 def on_w_press(event):
-	c.delete("all")
-	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
-	print("Key pressed: w")
+	print_key('w')
+	reset_canvas()
 
 	box = red_letter_box(W_KEY)
 
 def on_x_press(event):
-	c.delete("all")
-	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img)
-	print("x Pressed")
+	print_key('x')
+	reset_canvas()
 
 	box = red_letter_box(X_KEY)
 
-
 def on_y_press(event):
-	print("y Pressed")
+	print_key('y')
+	reset_canvas()
 
 def on_z_press(event):
-	print("z Pressed")
+	print_key('z')
+	reset_canvas()
 
 def main():
 	root.bind("<Return>", on_return)
