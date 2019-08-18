@@ -65,6 +65,11 @@ KEY_BACKSPACE = KEY_RETURN = ((262, 145), (295, 126), (329, 185), (296, 205))
 KEY_RAISE = ((331, 184), (321, 148), (358, 138), (368, 174))
 KEY_SHIFT = KEY_DELETE = (370, 135, 407, 173)
 
+IMG_PRIMARY_PATH = "../images/minidox-primary-layer.png"
+IMG_LOWER_PATH = "../images/minidox-lower-layer.png"
+IMG_RAISE_PATH = "../images/minidox-raise-layer.png"
+IMG_BOTH_PATH = "../images/minidox-BOTH-layer.png"
+
 def window_properties():
 	root.title("Keyboard Visualizer")
 	root.attributes("-topmost", True)
@@ -102,7 +107,6 @@ def lower_layer():
 		root.bind("<Delete>", on_delete_press)
 
 def primary_layer():
-
 	root.bind('Q', on_q_press)
 	root.bind('W', on_w_press)
 	root.bind('E', on_e_press)
@@ -561,22 +565,16 @@ def main():
 
 	root.mainloop()
 
+
 root = tk.Tk() 
 window_properties()
 window_size()
 
 c = tk.Canvas(root, height=WINDOW_HEIGHT, width=WINDOW_WIDTH)
 
-img_primary_path = "../images/minidox-primary-layer.png"
-img_primary = ImageTk.PhotoImage(file=img_primary_path)
-
-img_lower_path = "../images/minidox-lower-layer.png"
-img_lower = ImageTk.PhotoImage(file=img_lower_path)
-
-img_raise_path = "../images/minidox-raise-layer.png"
-img_raise = ImageTk.PhotoImage(file=img_raise_path)
-
-img_both_path = "../images/minidox-BOTH-layer.png"
-img_both = ImageTk.PhotoImage(file=img_both_path)
+img_primary = ImageTk.PhotoImage(file=IMG_PRIMARY_PATH)
+img_lower = ImageTk.PhotoImage(file=IMG_LOWER_PATH)
+img_raise = ImageTk.PhotoImage(file=IMG_RAISE_PATH)
+img_both = ImageTk.PhotoImage(file=IMG_BOTH_PATH)
 
 main()
