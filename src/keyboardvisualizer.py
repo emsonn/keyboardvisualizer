@@ -1,3 +1,6 @@
+# References:
+# https://effbot.org/tkinterbook/tkinter-events-and-bindings.htm
+
 import tkinter as tk
 from PIL import ImageTk
 
@@ -42,8 +45,17 @@ COMMA_KEY = (384, 86, 422, 124)
 PERIOD_KEY = (425, 91, 462, 130)
 FORWARDSLASH_KEY = (465, 101, 503, 140)
 
+CONTROL_KEY = (105, 136, 142, 174)
+LOWER_KEY = ()
+SPACE_KEY = ()
+
+BACKSPACE_KEY = ()
+RAISE_KEY = ()
+SHIFT_KEY = (370, 135, 407, 173)
+
 root = tk.Tk()
 root.title("Keyboard Visualizer")
+root.focus_set()
 
 root.attributes("-topmost", True)
 
@@ -108,7 +120,7 @@ def listen_for_keyboard():
 	root.bind('B', on_b_press)
 	root.bind('N', on_n_press)
 	root.bind('M', on_m_press)
-	root.bind('<less>', on_comma_press)
+	root.bind("<less>", on_comma_press)
 	root.bind('>', on_period_press)
 	root.bind('?', on_forwardslash_press)
 	root.bind('z', on_z_press)
@@ -121,6 +133,10 @@ def listen_for_keyboard():
 	root.bind(',', on_comma_press)
 	root.bind('.', on_period_press)
 	root.bind('/', on_forwardslash_press)
+
+	root.bind("<Control_L>", on_control_press)
+
+	root.bind("<Shift_L>", on_shift_press)
 
 def reset_canvas():
 	c.delete("all")
@@ -199,7 +215,7 @@ def on_l_press(event):
 	visualize_keyboard('l', L_KEY)
 
 def on_semicolon_press(event):
-	visualize_keyboard('semicolon', SEMICOLON_KEY)
+	visualize_keyboard("semicolon", SEMICOLON_KEY)
 
 # ========================
 
@@ -232,6 +248,14 @@ def on_period_press(event):
 
 def on_forwardslash_press(event):
 	visualize_keyboard('/', FORWARDSLASH_KEY)
+
+# ========================
+
+def on_control_press(event):
+	visualize_keyboard("control", CONTROL_KEY)
+
+def on_shift_press(event):
+	visualize_keyboard("shift", SHIFT_KEY)
 
 def main():
 	listen_for_keyboard()
