@@ -46,14 +46,15 @@ PERIOD_KEY = (425, 91, 462, 130)
 FORWARDSLASH_KEY = (465, 101, 503, 140)
 
 CONTROL_KEY = (105, 136, 142, 174)
-LOWER_KEY = ()
-SPACE_KEY = ()
 
-BACKSPACE_KEY = ()
-RAISE_KEY = ()
+# Bottom left, top left, top right, bottom right
+LOWER_KEY = ((144, 175), (154, 138), (191, 148), (181, 185))
+SPACE_KEY = ((182, 186), (217, 127), (250, 146), (216, 205))
+BACKSPACE_KEY = ((262, 145), (295, 126), (329, 185), (296, 205))
+RAISE_KEY = ((331, 184), (321, 148), (358, 138), (368, 174))
 SHIFT_KEY = (370, 135, 407, 173)
 
-root = tk.Tk()
+root = tk.Tk() 
 root.title("Keyboard Visualizer")
 root.focus_set()
 
@@ -135,7 +136,11 @@ def listen_for_keyboard():
 	root.bind('/', on_forwardslash_press)
 
 	root.bind("<Control_L>", on_control_press)
+	root.bind("1", on_lower_press)
+	root.bind("<space>", on_space_press)
 
+	root.bind("<BackSpace>", on_backspace_press)
+	root.bind("2", on_raise_press)
 	root.bind("<Shift_L>", on_shift_press)
 
 def reset_canvas():
@@ -144,118 +149,140 @@ def reset_canvas():
 
 def red_letter_box(key_coords):
 	return c.create_rectangle(key_coords[0], key_coords[1], 
-								key_coords[2], key_coords[3], 
-								fill=DEFAULT_COLOR)
+							  key_coords[2], key_coords[3], 
+							  fill=DEFAULT_COLOR)
+
+def red_letter_polygon(key_coords):
+	return c.create_polygon(key_coords[0], key_coords[1],
+							key_coords[2], key_coords[3],
+							fill=DEFAULT_COLOR)
 
 def print_key(key):
 	print("Key pressed: " + key)
 
-def visualize_keyboard(key, keycode):
+def visualize_keyboard_square(key, keycode):
 	print_key(key)
 	reset_canvas()
 	red_letter_box(keycode)
 
+def visualize_keyboard_polygon(key, keycode):
+	print_key(key)
+	reset_canvas()
+	red_letter_polygon(keycode)
+
 def on_q_press(event):
-	visualize_keyboard('q', Q_KEY)
+	visualize_keyboard_square('q', Q_KEY)
 
 def on_w_press(event):
-	visualize_keyboard('w', W_KEY)
+	visualize_keyboard_square('w', W_KEY)
 
 def on_e_press(event):
-	visualize_keyboard('e', E_KEY)
+	visualize_keyboard_square('e', E_KEY)
 
 def on_r_press(event):
-	visualize_keyboard('r', R_KEY)
+	visualize_keyboard_square('r', R_KEY)
 
 def on_t_press(event):
-	visualize_keyboard('t', T_KEY)
+	visualize_keyboard_square('t', T_KEY)
 
 def on_y_press(event):
-	visualize_keyboard('y', Y_KEY)
+	visualize_keyboard_square('y', Y_KEY)
 
 def on_u_press(event):
-	visualize_keyboard('u', U_KEY)
+	visualize_keyboard_square('u', U_KEY)
 
 def on_i_press(event):
-	visualize_keyboard('i', I_KEY)
+	visualize_keyboard_square('i', I_KEY)
 
 def on_o_press(event):
-	visualize_keyboard('o', O_KEY)
+	visualize_keyboard_square('o', O_KEY)
 
 def on_p_press(event):
-	visualize_keyboard('p', P_KEY)
+	visualize_keyboard_square('p', P_KEY)
 
 # ========================
 
 def on_a_press(event):
-	visualize_keyboard('a', A_KEY)
+	visualize_keyboard_square('a', A_KEY)
 
 def on_s_press(event):
-	visualize_keyboard('s', S_KEY)
+	visualize_keyboard_square('s', S_KEY)
 
 def on_d_press(event):
-	visualize_keyboard('d', D_KEY)
+	visualize_keyboard_square('d', D_KEY)
 
 def on_f_press(event):
-	visualize_keyboard('f', F_KEY)
+	visualize_keyboard_square('f', F_KEY)
 
 def on_g_press(event):
-	visualize_keyboard('g', G_KEY)
+	visualize_keyboard_square('g', G_KEY)
 
 def on_h_press(event):
-	visualize_keyboard('h', H_KEY)
+	visualize_keyboard_square('h', H_KEY)
 
 def on_j_press(event):
-	visualize_keyboard('j', J_KEY)
+	visualize_keyboard_square('j', J_KEY)
 
 def on_k_press(event):
-	visualize_keyboard('k', K_KEY)
+	visualize_keyboard_square('k', K_KEY)
 
 def on_l_press(event):
-	visualize_keyboard('l', L_KEY)
+	visualize_keyboard_square('l', L_KEY)
 
 def on_semicolon_press(event):
-	visualize_keyboard("semicolon", SEMICOLON_KEY)
+	visualize_keyboard_square("semicolon", SEMICOLON_KEY)
 
 # ========================
 
 def on_z_press(event):
-	visualize_keyboard('z', Z_KEY)
+	visualize_keyboard_square('z', Z_KEY)
 
 def on_x_press(event):
-	visualize_keyboard('x', X_KEY)
+	visualize_keyboard_square('x', X_KEY)
 
 def on_c_press(event):
-	visualize_keyboard('c', C_KEY)
+	visualize_keyboard_square('c', C_KEY)
 
 def on_v_press(event):
-	visualize_keyboard('v', V_KEY)
+	visualize_keyboard_square('v', V_KEY)
 
 def on_b_press(event):
-	visualize_keyboard('b', B_KEY)
+	visualize_keyboard_square('b', B_KEY)
 
 def on_n_press(event):
-	visualize_keyboard('n', N_KEY)
+	visualize_keyboard_square('n', N_KEY)
 
 def on_m_press(event):
-	visualize_keyboard('m', M_KEY)
+	visualize_keyboard_square('m', M_KEY)
 
 def on_comma_press(event):
-	visualize_keyboard(',', COMMA_KEY)
+	visualize_keyboard_square(',', COMMA_KEY)
 
 def on_period_press(event):
-	visualize_keyboard('.', PERIOD_KEY)
+	visualize_keyboard_square('.', PERIOD_KEY)
 
 def on_forwardslash_press(event):
-	visualize_keyboard('/', FORWARDSLASH_KEY)
+	visualize_keyboard_square('/', FORWARDSLASH_KEY)
 
 # ========================
 
 def on_control_press(event):
-	visualize_keyboard("control", CONTROL_KEY)
+	visualize_keyboard_square("control", CONTROL_KEY)
+
+def on_lower_press(event):
+	visualize_keyboard_polygon("lower", LOWER_KEY)
+
+def on_space_press(event):
+	visualize_keyboard_polygon("space", SPACE_KEY)
+
+def on_backspace_press(event):
+	visualize_keyboard_polygon("backspace", BACKSPACE_KEY)
+
+def on_raise_press(event):
+	visualize_keyboard_polygon("raise", RAISE_KEY)
 
 def on_shift_press(event):
-	visualize_keyboard("shift", SHIFT_KEY)
+	visualize_keyboard_square("shift", SHIFT_KEY)
 
 def main():
 	listen_for_keyboard()
