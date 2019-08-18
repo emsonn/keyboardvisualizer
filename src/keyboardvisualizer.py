@@ -5,15 +5,7 @@
 
 import tkinter as tk
 from PIL import ImageTk
-from sys import platform
-import kbconst
-
-if platform == "linux" or platform == "linux2":
-	OS_TYPE = "linux"
-elif platform == "darwin":
-	OS_TYPE = "macOS"
-else:
-	OS_TYPE = "windows"
+import keyboardconstants as kbc
 
 def window_properties():
 	root.title("Keyboard Visualizer")
@@ -22,7 +14,7 @@ def window_properties():
 
 def window_size():
 	top_right_dimension = root.winfo_screenwidth()
-	root.geometry("+{}+{}".format(top_right_dimension, kbconst.OFFSET_DOWN))
+	root.geometry("+{}+{}".format(top_right_dimension, kbc.OFFSET_DOWN))
 
 def lower_layer():
 	root.bind('!', on_exclamation_press)
@@ -48,7 +40,7 @@ def lower_layer():
 	root.bind('"', on_doublequote_press)
 	root.bind("<Return>", on_return_press)
 	
-	if OS_TYPE is "linux" or OS_TYPE is "windows":
+	if kbc.OS_TYPE is "linux" or kbc.OS_TYPE is "windows":
 		root.bind("<Delete>", on_delete_press)
 
 def primary_layer():
@@ -116,10 +108,9 @@ def primary_layer():
 	root.bind('/', on_forwardslash_press)
 
 	root.bind("<Control_L>", on_control_press)
-
 	root.bind("<space>", on_space_press)
 	
-	if OS_TYPE is "linux" or OS_TYPE is "windows":
+	if kbc.OS_TYPE is "linux" or kbc.OS_TYPE is "windows":
 		root.bind("<BackSpace>", on_backspace_press)
 	else:
 		root.bind("<Delete>", on_backspace_press)
@@ -150,14 +141,14 @@ def raise_layer():
 
 	root.bind('`', on_backtick_press)
 
-	if OS_TYPE is "linux":
+	if kbc.OS_TYPE is "linux":
 		root.bind("<Super_L>", on_super_press)
-	elif OS_TYPE is "macOS":
+	elif kbc.OS_TYPE is "macOS":
 		root.bind("<Command>", on_command_press)
 	else:
 		root.bind("<Win_L>", on_windows_press)
 
-	if OS_TYPE is "linux" or OS_TYPE is "windows":
+	if kbc.OS_TYPE is "linux" or kbc.OS_TYPE is "windows":
 		root.bind("<Alt_L>", on_leftalt_press)
 	# else:
 	# 	root.bind("<>", on_raise_press)
@@ -192,19 +183,19 @@ def print_key(key):
 def reset_canvas(layer):
 	c.delete("all")
 	
-	c.create_image(kbconst.INSIDE_OFFSET_WIDTH, 
-				   kbconst.INSIDE_OFFSET_HEIGHT, image=layer)	
+	c.create_image(kbc.INSIDE_OFFSET_WIDTH, 
+				   kbc.INSIDE_OFFSET_HEIGHT, image=layer)	
 	c.pack()
 
 def red_letter_box(key_coords):
 	return c.create_rectangle(key_coords[0], key_coords[1], 
 							  key_coords[2], key_coords[3], 
-							  fill=kbconst.DEFAULT_COLOR)
+							  fill=kbc.DEFAULT_COLOR)
 
 def red_letter_polygon(key_coords):
 	return c.create_polygon(key_coords[0], key_coords[1],
 							key_coords[2], key_coords[3],
-							fill=kbconst.DEFAULT_COLOR)
+							fill=kbc.DEFAULT_COLOR)
 
 def visualize_keyboard_square(key, keycode, layer):
 	print_key(key)
@@ -217,292 +208,292 @@ def visualize_keyboard_polygon(key, keycode, layer):
 	red_letter_polygon(keycode)
 
 def on_exclamation_press(event):
-	visualize_keyboard_square('!', kbconst.KEY_EXCLAMATION, img_lower)
+	visualize_keyboard_square('!', kbc.KEY_EXCLAMATION, img_lower)
 
 def on_atsign_press(event):
-	visualize_keyboard_square('@', kbconst.KEY_ATSIGN, img_lower)
+	visualize_keyboard_square('@', kbc.KEY_ATSIGN, img_lower)
 
 def on_poundsign_press(event):
-	visualize_keyboard_square('#', kbconst.KEY_POUNDSIGN, img_lower)
+	visualize_keyboard_square('#', kbc.KEY_POUNDSIGN, img_lower)
 
 def on_dollarsign_press(event):
-	visualize_keyboard_square('$', kbconst.KEY_DOLLARSIGN, img_lower)
+	visualize_keyboard_square('$', kbc.KEY_DOLLARSIGN, img_lower)
 
 def on_percentsign_press(event):
-	visualize_keyboard_square('%', kbconst.KEY_PERCENTSIGN, img_lower)
+	visualize_keyboard_square('%', kbc.KEY_PERCENTSIGN, img_lower)
 
 def on_caret_press(event):
-	visualize_keyboard_square('^', kbconst.KEY_CARET, img_lower)
+	visualize_keyboard_square('^', kbc.KEY_CARET, img_lower)
 
 def on_ampersand_press(event):
-	visualize_keyboard_square('&', kbconst.KEY_AMPERSAND, img_lower)
+	visualize_keyboard_square('&', kbc.KEY_AMPERSAND, img_lower)
 
 def on_asterisk_press(event):
-	visualize_keyboard_square('*', kbconst.KEY_ASTERISK, img_lower)
+	visualize_keyboard_square('*', kbc.KEY_ASTERISK, img_lower)
 
 def on_leftparen_press(event):
-	visualize_keyboard_square('(', kbconst.KEY_LEFTPAREN, img_lower)
+	visualize_keyboard_square('(', kbc.KEY_LEFTPAREN, img_lower)
 
 def on_rightparen_press(event):
-	visualize_keyboard_square(')', kbconst.KEY_RIGHTPAREN, img_lower)
+	visualize_keyboard_square(')', kbc.KEY_RIGHTPAREN, img_lower)
 
 def on_q_press(event):
-	visualize_keyboard_square('q', kbconst.KEY_Q, img_primary)
+	visualize_keyboard_square('q', kbc.KEY_Q, img_primary)
 
 def on_w_press(event):
-	visualize_keyboard_square('w', kbconst.KEY_W, img_primary)
+	visualize_keyboard_square('w', kbc.KEY_W, img_primary)
 
 def on_e_press(event):
-	visualize_keyboard_square('e', kbconst.KEY_E, img_primary)
+	visualize_keyboard_square('e', kbc.KEY_E, img_primary)
 
 def on_r_press(event):
-	visualize_keyboard_square('r', kbconst.KEY_R, img_primary)
+	visualize_keyboard_square('r', kbc.KEY_R, img_primary)
 
 def on_t_press(event):
-	visualize_keyboard_square('t', kbconst.KEY_T, img_primary)
+	visualize_keyboard_square('t', kbc.KEY_T, img_primary)
 
 def on_y_press(event):
-	visualize_keyboard_square('y', kbconst.KEY_Y, img_primary)
+	visualize_keyboard_square('y', kbc.KEY_Y, img_primary)
 
 def on_u_press(event):
-	visualize_keyboard_square('u', kbconst.KEY_U, img_primary)
+	visualize_keyboard_square('u', kbc.KEY_U, img_primary)
 
 def on_i_press(event):
-	visualize_keyboard_square('i', kbconst.KEY_I, img_primary)
+	visualize_keyboard_square('i', kbc.KEY_I, img_primary)
 
 def on_o_press(event):
-	visualize_keyboard_square('o', kbconst.KEY_O, img_primary)
+	visualize_keyboard_square('o', kbc.KEY_O, img_primary)
 
 def on_p_press(event):
-	visualize_keyboard_square('p', kbconst.KEY_P, img_primary)
+	visualize_keyboard_square('p', kbc.KEY_P, img_primary)
 
 def on_1_press(event):
-	visualize_keyboard_square('1', kbconst.KEY_1, img_raise)
+	visualize_keyboard_square('1', kbc.KEY_1, img_raise)
 
 def on_2_press(event):
-	visualize_keyboard_square('2', kbconst.KEY_2, img_raise)
+	visualize_keyboard_square('2', kbc.KEY_2, img_raise)
 
 def on_3_press(event):
-	visualize_keyboard_square('3', kbconst.KEY_3, img_raise)
+	visualize_keyboard_square('3', kbc.KEY_3, img_raise)
 
 def on_4_press(event):
-	visualize_keyboard_square('4', kbconst.KEY_4, img_raise)
+	visualize_keyboard_square('4', kbc.KEY_4, img_raise)
 
 def on_5_press(event):
-	visualize_keyboard_square('5', kbconst.KEY_5, img_raise)
+	visualize_keyboard_square('5', kbc.KEY_5, img_raise)
 
 def on_6_press(event):
-	visualize_keyboard_square('6', kbconst.KEY_6, img_raise)
+	visualize_keyboard_square('6', kbc.KEY_6, img_raise)
 
 def on_7_press(event):
-	visualize_keyboard_square('7', kbconst.KEY_7, img_raise)
+	visualize_keyboard_square('7', kbc.KEY_7, img_raise)
 
 def on_8_press(event):
-	visualize_keyboard_square('8', kbconst.KEY_8, img_raise)
+	visualize_keyboard_square('8', kbc.KEY_8, img_raise)
 
 def on_9_press(event):
-	visualize_keyboard_square('9', kbconst.KEY_9, img_raise)
+	visualize_keyboard_square('9', kbc.KEY_9, img_raise)
 
 def on_0_press(event):
-	visualize_keyboard_square('0', kbconst.KEY_0, img_raise)
+	visualize_keyboard_square('0', kbc.KEY_0, img_raise)
 
 def on_F1_press(event):
-	visualize_keyboard_square("F1", kbconst.KEY_F1, img_both)
+	visualize_keyboard_square("F1", kbc.KEY_F1, img_both)
 
 def on_F2_press(event):
-	visualize_keyboard_square("F2", kbconst.KEY_F2, img_both)
+	visualize_keyboard_square("F2", kbc.KEY_F2, img_both)
 
 def on_F3_press(event):
-	visualize_keyboard_square("F3", kbconst.KEY_F3, img_both)
+	visualize_keyboard_square("F3", kbc.KEY_F3, img_both)
 
 def on_F4_press(event):
-	visualize_keyboard_square("F4", kbconst.KEY_F4, img_both)
+	visualize_keyboard_square("F4", kbc.KEY_F4, img_both)
 
 def on_F5_press(event):
-	visualize_keyboard_square("F5", kbconst.KEY_F5, img_both)
+	visualize_keyboard_square("F5", kbc.KEY_F5, img_both)
 
 def on_F6_press(event):
-	visualize_keyboard_square("F6", kbconst.KEY_F6, img_both)
+	visualize_keyboard_square("F6", kbc.KEY_F6, img_both)
 
 def on_F7_press(event):
-	visualize_keyboard_square("F7", kbconst.KEY_F7, img_both)
+	visualize_keyboard_square("F7", kbc.KEY_F7, img_both)
 
 def on_F8_press(event):
-	visualize_keyboard_square("F8", kbconst.KEY_F8, img_both)
+	visualize_keyboard_square("F8", kbc.KEY_F8, img_both)
 
 def on_F9_press(event):
-	visualize_keyboard_square("F9", kbconst.KEY_F9, img_both)
+	visualize_keyboard_square("F9", kbc.KEY_F9, img_both)
 
 def on_F10_press(event):
-	visualize_keyboard_square("F10", kbconst.KEY_F10, img_both)
+	visualize_keyboard_square("F10", kbc.KEY_F10, img_both)
 
 # ====================================================================
 
 def on_escape_press(event):
-	visualize_keyboard_square("Escape", kbconst.KEY_ESCAPE, img_lower)
+	visualize_keyboard_square("Escape", kbc.KEY_ESCAPE, img_lower)
 
 def on_underscore_press(event):
-	visualize_keyboard_square('_', kbconst.KEY_UNDERSCORE, img_lower)
+	visualize_keyboard_square('_', kbc.KEY_UNDERSCORE, img_lower)
 
 def on_plussign_press(event):
-	visualize_keyboard_square('+', kbconst.KEY_PLUSSIGN, img_lower)
+	visualize_keyboard_square('+', kbc.KEY_PLUSSIGN, img_lower)
 
 def on_leftcurly_press(event):
-	visualize_keyboard_square('{', kbconst.KEY_LEFTCURLY, img_lower)
+	visualize_keyboard_square('{', kbc.KEY_LEFTCURLY, img_lower)
 
 def on_rightcurly_press(event):
-	visualize_keyboard_square('}', kbconst.KEY_RIGHTCURLY, img_lower)
+	visualize_keyboard_square('}', kbc.KEY_RIGHTCURLY, img_lower)
 
 def on_a_press(event):
-	visualize_keyboard_square('a', kbconst.KEY_A, img_primary)
+	visualize_keyboard_square('a', kbc.KEY_A, img_primary)
 
 def on_s_press(event):
-	visualize_keyboard_square('s', kbconst.KEY_S, img_primary)
+	visualize_keyboard_square('s', kbc.KEY_S, img_primary)
 
 def on_d_press(event):
-	visualize_keyboard_square('d', kbconst.KEY_D, img_primary)
+	visualize_keyboard_square('d', kbc.KEY_D, img_primary)
 
 def on_f_press(event):
-	visualize_keyboard_square('f', kbconst.KEY_F, img_primary)
+	visualize_keyboard_square('f', kbc.KEY_F, img_primary)
 
 def on_g_press(event):
-	visualize_keyboard_square('g', kbconst.KEY_G, img_primary)
+	visualize_keyboard_square('g', kbc.KEY_G, img_primary)
 
 def on_h_press(event):
-	visualize_keyboard_square('h', kbconst.KEY_H, img_primary)
+	visualize_keyboard_square('h', kbc.KEY_H, img_primary)
 
 def on_j_press(event):
-	visualize_keyboard_square('j', kbconst.KEY_J, img_primary)
+	visualize_keyboard_square('j', kbc.KEY_J, img_primary)
 
 def on_k_press(event):
-	visualize_keyboard_square('k', kbconst.KEY_K, img_primary)
+	visualize_keyboard_square('k', kbc.KEY_K, img_primary)
 
 def on_l_press(event):
-	visualize_keyboard_square('l', kbconst.KEY_L, img_primary)
+	visualize_keyboard_square('l', kbc.KEY_L, img_primary)
 
 def on_semicolon_press(event):
-	visualize_keyboard_square(';', kbconst.KEY_SEMICOLON, img_primary)
+	visualize_keyboard_square(';', kbc.KEY_SEMICOLON, img_primary)
 
 def on_tab_press(event):
-	visualize_keyboard_square("tab", kbconst.KEY_TAB, img_raise)
+	visualize_keyboard_square("tab", kbc.KEY_TAB, img_raise)
 
 def on_leftarrow_press(event):
-	visualize_keyboard_square("left arrow", kbconst.KEY_LEFTARROW, img_raise)
+	visualize_keyboard_square("left arrow", kbc.KEY_LEFTARROW, img_raise)
 
 def on_downarrow_press(event):
-	visualize_keyboard_square("down arrow", kbconst.KEY_DOWNARROW, img_raise)
+	visualize_keyboard_square("down arrow", kbc.KEY_DOWNARROW, img_raise)
 
 def on_uparrow_press(event):
-	visualize_keyboard_square("up arrow", kbconst.KEY_UPARROW, img_raise)
+	visualize_keyboard_square("up arrow", kbc.KEY_UPARROW, img_raise)
 
 def on_rightarrow_press(event):
-	visualize_keyboard_square("right arrow", kbconst.KEY_RIGHTARROW, img_raise)
+	visualize_keyboard_square("right arrow", kbc.KEY_RIGHTARROW, img_raise)
 
 def on_hyphen_press(event):
-	visualize_keyboard_square('-', kbconst.KEY_HYPHEN, img_raise)
+	visualize_keyboard_square('-', kbc.KEY_HYPHEN, img_raise)
 
 def on_equalssign_press(event):
-	visualize_keyboard_square('=', kbconst.KEY_EQUALSSIGN, img_raise)
+	visualize_keyboard_square('=', kbc.KEY_EQUALSSIGN, img_raise)
 
 def on_leftbracket_press(event):
-	visualize_keyboard_square('[', kbconst.KEY_LEFTBRACKET, img_raise)
+	visualize_keyboard_square('[', kbc.KEY_LEFTBRACKET, img_raise)
 
 def on_rightbracket_press(event):
-	visualize_keyboard_square(']', kbconst.KEY_RIGHTBRACKET, img_raise)
+	visualize_keyboard_square(']', kbc.KEY_RIGHTBRACKET, img_raise)
 
 def on_F11_press(event):
-	visualize_keyboard_square("F11", kbconst.KEY_F11, img_both)
+	visualize_keyboard_square("F11", kbc.KEY_F11, img_both)
 
 def on_F12_press(event):
-	visualize_keyboard_square("F12", kbconst.KEY_F12, img_both)
+	visualize_keyboard_square("F12", kbc.KEY_F12, img_both)
 
 # ====================================================================
 
 def on_capslock_press(event):
-	visualize_keyboard_square("CAPSLOCK", kbconst.KEY_CAPSLOCK, img_lower)
+	visualize_keyboard_square("CAPSLOCK", kbc.KEY_CAPSLOCK, img_lower)
 
 def on_tilde_press(event):
-	visualize_keyboard_square('~', kbconst.KEY_TILDE, img_lower)
+	visualize_keyboard_square('~', kbc.KEY_TILDE, img_lower)
 
 def on_pipe_press(event):
-	visualize_keyboard_square('|', kbconst.KEY_PIPE, img_lower)
+	visualize_keyboard_square('|', kbc.KEY_PIPE, img_lower)
 
 def on_doublequote_press(event):
-	visualize_keyboard_square('"', kbconst.KEY_DOUBLEQUOTE, img_lower)
+	visualize_keyboard_square('"', kbc.KEY_DOUBLEQUOTE, img_lower)
 
 def on_return_press(event):
-	visualize_keyboard_square("Return", kbconst.KEY_RETURN, img_lower)
+	visualize_keyboard_square("Return", kbc.KEY_RETURN, img_lower)
 
 def on_z_press(event):
-	visualize_keyboard_square('z', kbconst.KEY_Z, img_primary)
+	visualize_keyboard_square('z', kbc.KEY_Z, img_primary)
 
 def on_x_press(event):
-	visualize_keyboard_square('x', kbconst.KEY_X, img_primary)
+	visualize_keyboard_square('x', kbc.KEY_X, img_primary)
 
 def on_c_press(event):
-	visualize_keyboard_square('c', kbconst.KEY_C, img_primary)
+	visualize_keyboard_square('c', kbc.KEY_C, img_primary)
 
 def on_v_press(event):
-	visualize_keyboard_square('v', kbconst.KEY_V, img_primary)
+	visualize_keyboard_square('v', kbc.KEY_V, img_primary)
 
 def on_b_press(event):
-	visualize_keyboard_square('b', kbconst.KEY_B, img_primary)
+	visualize_keyboard_square('b', kbc.KEY_B, img_primary)
 
 def on_n_press(event):
-	visualize_keyboard_square('n', kbconst.KEY_N, img_primary)
+	visualize_keyboard_square('n', kbc.KEY_N, img_primary)
 
 def on_m_press(event):
-	visualize_keyboard_square('m', kbconst.KEY_M, img_primary)
+	visualize_keyboard_square('m', kbc.KEY_M, img_primary)
 
 def on_comma_press(event):
-	visualize_keyboard_square(',', kbconst.KEY_COMMA, img_primary)
+	visualize_keyboard_square(',', kbc.KEY_COMMA, img_primary)
 
 def on_period_press(event):
-	visualize_keyboard_square('.', kbconst.KEY_PERIOD, img_primary)
+	visualize_keyboard_square('.', kbc.KEY_PERIOD, img_primary)
 
 def on_forwardslash_press(event):
-	visualize_keyboard_square('/', kbconst.KEY_FORWARDSLASH, img_primary)
+	visualize_keyboard_square('/', kbc.KEY_FORWARDSLASH, img_primary)
 
 def on_backtick_press(event):
-	visualize_keyboard_square('`', kbconst.KEY_BACKTICK, img_raise)
+	visualize_keyboard_square('`', kbc.KEY_BACKTICK, img_raise)
 
 def on_super_press(event):
-	visualize_keyboard_square("SUPER", kbconst.KEY_SUPER, img_raise)
+	visualize_keyboard_square("SUPER", kbc.KEY_SUPER, img_raise)
 
 def on_command_press(event):
-	visualize_keyboard_square("COMMAND", kbconst.KEY_SUPER, img_raise)
+	visualize_keyboard_square("COMMAND", kbc.KEY_SUPER, img_raise)
 
 def on_windows_press(event):
-	visualize_keyboard_square("WINDOWS", kbconst.KEY_SUPER, img_raise)
+	visualize_keyboard_square("WINDOWS", kbc.KEY_SUPER, img_raise)
 
 def on_leftalt_press(event):
-	visualize_keyboard_square("LEFT ALT", kbconst.KEY_LEFTALT, img_raise)
+	visualize_keyboard_square("LEFT ALT", kbc.KEY_LEFTALT, img_raise)
 
 def on_backslash_press(event):
-	visualize_keyboard_square('\\', kbconst.KEY_BACKSLASH, img_raise)
+	visualize_keyboard_square('\\', kbc.KEY_BACKSLASH, img_raise)
 
 def on_singlequote_press(event):
-	visualize_keyboard_square('\'', kbconst.KEY_SINGLEQUOTE, img_raise)
+	visualize_keyboard_square('\'', kbc.KEY_SINGLEQUOTE, img_raise)
 
 # ====================================================================
 
 def on_control_press(event):
-	visualize_keyboard_square("control", kbconst.KEY_CONTROL, img_primary)
+	visualize_keyboard_square("control", kbc.KEY_CONTROL, img_primary)
 
 def on_space_press(event):
-	visualize_keyboard_polygon("space", kbconst.KEY_SPACE, img_primary)
+	visualize_keyboard_polygon("space", kbc.KEY_SPACE, img_primary)
 
 def on_backspace_press(event):
-	visualize_keyboard_polygon("backspace", kbconst.KEY_BACKSPACE, img_primary)
+	visualize_keyboard_polygon("backspace", kbc.KEY_BACKSPACE, img_primary)
 
 def on_return_press(event):
-	visualize_keyboard_polygon("return", kbconst.KEY_RETURN, img_lower)
+	visualize_keyboard_polygon("return", kbc.KEY_RETURN, img_lower)
 
 def on_shift_press(event):
-	visualize_keyboard_square("shift", kbconst.KEY_SHIFT, img_primary)
+	visualize_keyboard_square("shift", kbc.KEY_SHIFT, img_primary)
 
 def on_delete_press(event):
-	visualize_keyboard_square("delete", kbconst.KEY_DELETE, img_lower)
+	visualize_keyboard_square("delete", kbc.KEY_DELETE, img_lower)
 
 def main():
 	reset_canvas(img_primary)
@@ -515,12 +506,12 @@ root = tk.Tk()
 window_properties()
 window_size()
 
-c = tk.Canvas(root, height=kbconst.WINDOW_HEIGHT, 
-			  width=kbconst.WINDOW_WIDTH)
+c = tk.Canvas(root, height=kbc.WINDOW_HEIGHT, 
+			  width=kbc.WINDOW_WIDTH)
 
-img_primary = ImageTk.PhotoImage(file=kbconst.IMG_PRIMARY_PATH)
-img_lower = ImageTk.PhotoImage(file=kbconst.IMG_LOWER_PATH)
-img_raise = ImageTk.PhotoImage(file=kbconst.IMG_RAISE_PATH)
-img_both = ImageTk.PhotoImage(file=kbconst.IMG_BOTH_PATH)
+img_primary = ImageTk.PhotoImage(file=kbc.IMG_PRIMARY_PATH)
+img_lower = ImageTk.PhotoImage(file=kbc.IMG_LOWER_PATH)
+img_raise = ImageTk.PhotoImage(file=kbc.IMG_RAISE_PATH)
+img_both = ImageTk.PhotoImage(file=kbc.IMG_BOTH_PATH)
 
 main()

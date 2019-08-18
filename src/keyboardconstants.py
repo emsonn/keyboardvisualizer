@@ -1,3 +1,12 @@
+from sys import platform
+
+if platform == "linux" or platform == "linux2":
+	OS_TYPE = "linux"
+elif platform == "darwin":
+	OS_TYPE = "macOS"
+else:
+	OS_TYPE = "windows"
+
 WINDOW_HEIGHT = 210
 WINDOW_WIDTH = 510
 OFFSET_DOWN = 0
