@@ -33,7 +33,7 @@ KEY_O = KEY_LEFTPAREN = KEY_9 = KEY_F9 = (425, 11, 462, 50)
 KEY_P = KEY_RIGHTPAREN = KEY_0 = KEY_F10 = (465, 21, 503, 60) 
 
 KEY_A = KEY_ESCAPE = KEY_TAB = KEY_F11 = (8, 61, 47, 100) 
-KEY_S = KEY_ARROWLEFT = KEY_F12 = (49, 51, 87, 90)
+KEY_S = KEY_LEFTARROW = KEY_F12 = (49, 51, 87, 90)
 KEY_D = KEY_DOWNARROW = (89, 45, 127, 85)
 KEY_F = KEY_UPARROW = (130, 51, 167, 90)
 KEY_G = KEY_RIGHTARROW = (170, 56, 208, 95)
@@ -60,7 +60,7 @@ KEY_CONTROL = (105, 136, 142, 174)
 KEY_LOWER = ((144, 175), (154, 138), (191, 148), (181, 185))
 KEY_SPACE = ((182, 186), (217, 127), (250, 146), (216, 205))
 
-KEY_BACKSPACE =  KEY_RETURN = ((262, 145), (295, 126), (329, 185), (296, 205))
+KEY_BACKSPACE = KEY_RETURN = ((262, 145), (295, 126), (329, 185), (296, 205))
 KEY_RAISE = ((331, 184), (321, 148), (358, 138), (368, 174))
 KEY_SHIFT = KEY_DELETE = (370, 135, 407, 173)
 
@@ -69,33 +69,36 @@ def window_properties():
 	root.attributes("-topmost", True)
 	root.focus_set()
 
+def window_size():
+	top_right_dimension = root.winfo_screenwidth()
+	root.geometry("+{}+{}".format(top_right_dimension, OFFSET_DOWN))
+
 def lower_layer():
 	root.bind('!', on_exclamation_press)
-	root.bind('@', on_lower_press)
-	root.bind('#', on_lower_press)
-	root.bind('$', on_lower_press)
-	root.bind('%', on_lower_press)
-	root.bind('^', on_lower_press)
-	root.bind('&', on_lower_press)
-	root.bind('*', on_lower_press)
-	root.bind('(', on_lower_press)
-	root.bind(')', on_lower_press)
+	root.bind('@', on_atsign_press)
+	root.bind('#', on_poundsign_press)
+	root.bind('$', on_dollarsign_press)
+	root.bind('%', on_percentsign_press)
+	root.bind('^', on_caret_press)
+	root.bind('&', on_ampersand_press)
+	root.bind('*', on_asterisk_press)
+	root.bind('(', on_leftparen_press)
+	root.bind(')', on_rightparen_press)
 
-	root.bind("<Escape>", on_lower_press)
-	root.bind('_', on_lower_press)
-	root.bind('+', on_lower_press)
-	root.bind('{', on_lower_press)
-	root.bind('}', on_lower_press)
+	root.bind("<Escape>", on_escape_press)
+	root.bind('_', on_underscore_press)
+	root.bind('+', on_plussign_press)
+	root.bind('{', on_leftcurly_press)
+	root.bind('}', on_rightcurly_press)
 
-	root.bind("<Caps_Lock>", on_lower_press)
-	root.bind('~', on_lower_press)
-	root.bind(',', on_lower_press)
-	root.bind('|', on_lower_press)
-	root.bind('"', on_lower_press)
-	root.bind("<Return>", on_lower_press)
+	root.bind("<Caps_Lock>", on_capslock_press)
+	root.bind('~', on_tilde_press)
+	root.bind('|', on_pipe_press)
+	root.bind('"', on_doublequote_press)
+	root.bind("<Return>", on_return_press)
 	
 	if OS_CODE is "linux" or OS_CODE is "windows":
-		root.bind("<Delete>", on_lower_press)
+		root.bind("<Delete>", on_delete_press)
 
 def primary_layer():
 
@@ -174,58 +177,58 @@ def primary_layer():
 	root.bind("<Shift_L>", on_shift_press)
 
 def raise_layer():
-	root.bind('1', on_raise_press)
-	root.bind('2', on_raise_press)
-	root.bind('3', on_raise_press)
-	root.bind('4', on_raise_press)
-	root.bind('5', on_raise_press)
-	root.bind('6', on_raise_press)
-	root.bind('7', on_raise_press)
-	root.bind('8', on_raise_press)
-	root.bind('9', on_raise_press)
-	root.bind('0', on_raise_press)
+	root.bind('1', on_1_press)
+	root.bind('2', on_2_press)
+	root.bind('3', on_3_press)
+	root.bind('4', on_4_press)
+	root.bind('5', on_5_press)
+	root.bind('6', on_6_press)
+	root.bind('7', on_7_press)
+	root.bind('8', on_8_press)
+	root.bind('9', on_9_press)
+	root.bind('0', on_0_press)
 
-	root.bind("<Tab>", on_raise_press)
-	root.bind("<Left>", on_raise_press)
-	root.bind("<Down>", on_raise_press)
-	root.bind("<Up>", on_raise_press)
-	root.bind("<Right>", on_raise_press)
-	root.bind('-', on_raise_press)
-	root.bind('=', on_raise_press)
-	root.bind('[', on_raise_press)
-	root.bind(']', on_raise_press)
+	root.bind("<Tab>", on_tab_press)
+	root.bind("<Left>", on_leftarrow_press)
+	root.bind("<Down>", on_downarrow_press)
+	root.bind("<Up>", on_uparrow_press)
+	root.bind("<Right>", on_rightarrow_press)
+	root.bind('-', on_hyphen_press)
+	root.bind('=', on_equalssign_press)
+	root.bind('[', on_leftbracket_press)
+	root.bind(']', on_rightbracket_press)
 
-	root.bind('`', on_raise_press)
+	root.bind('`', on_backtick_press)
 
 	if OS_CODE is "linux":
-		root.bind("<Super_L>", on_raise_press)
+		root.bind("<Super_L>", on_super_press)
 	elif OS_CODE is "macOS":
-		root.bind("<Command>", on_raise_press)
+		root.bind("<Command>", on_command_press)
 	else:
-		root.bind("<Win_L>", on_raise_press)
+		root.bind("<Win_L>", on_windows_press)
 
 	if OS_CODE is "linux" or OS_CODE is "windows":
-		root.bind("<Alt_L>", on_raise_press)
+		root.bind("<Alt_L>", on_leftalt_press)
 	# else:
 	# 	root.bind("<>", on_raise_press)
 
-	root.bind('\\', on_raise_press)
-	root.bind('\'', on_raise_press)
+	root.bind('\\', on_backslash_press)
+	root.bind('\'', on_singlequote_press)
 
 def both_layer():
-	root.bind("<F1>", on_both_press)
-	root.bind("<F2>", on_both_press)
-	root.bind("<F3>", on_both_press)
-	root.bind("<F4>", on_both_press)
-	root.bind("<F5>", on_both_press)
-	root.bind("<F6>", on_both_press)
-	root.bind("<F7>", on_both_press)
-	root.bind("<F8>", on_both_press)
-	root.bind("<F9>", on_both_press)
-	root.bind("<F10>", on_both_press)
+	root.bind("<F1>", on_F1_press)
+	root.bind("<F2>", on_F2_press)
+	root.bind("<F3>", on_F3_press)
+	root.bind("<F4>", on_F4_press)
+	root.bind("<F5>", on_F5_press)
+	root.bind("<F6>", on_F6_press)
+	root.bind("<F7>", on_F7_press)
+	root.bind("<F8>", on_F8_press)
+	root.bind("<F9>", on_F9_press)
+	root.bind("<F10>", on_F10_press)
 
-	root.bind("<F11>", on_both_press)
-	root.bind("<F12>", on_both_press)
+	root.bind("<F11>", on_F11_press)
+	root.bind("<F12>", on_F12_press)
 
 def listen_for_keyboard():
 	lower_layer()
@@ -239,19 +242,8 @@ def print_key(key):
 def reset_canvas(layer):
 	c.delete("all")
 	
-	if layer is "raise":
-		c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, 
-					   image=img_raise)
-	elif layer is "lower":
-		c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT,
-					   image=img_lower)
-	elif layer is "both":
-		c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT,
-					   image=img_both)
-	else:
-		c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT,
-					   image=img_primary)
-	
+	c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT,
+					   image=layer)	
 	c.pack()
 
 def red_letter_box(key_coords):
@@ -275,138 +267,302 @@ def visualize_keyboard_polygon(key, keycode, layer):
 	red_letter_polygon(keycode)
 
 def on_exclamation_press(event):
-	visualize_keyboard_square('!', KEY_EXCLAMATION, "lower")
+	visualize_keyboard_square('!', KEY_EXCLAMATION, img_lower)
+
+def on_atsign_press(event):
+	visualize_keyboard_square('@', KEY_ATSIGN, img_lower)
+
+def on_poundsign_press(event):
+	visualize_keyboard_square('#', KEY_POUNDSIGN, img_lower)
+
+def on_dollarsign_press(event):
+	visualize_keyboard_square('$', KEY_DOLLARSIGN, img_lower)
+
+def on_percentsign_press(event):
+	visualize_keyboard_square('%', KEY_PERCENTSIGN, img_lower)
+
+def on_caret_press(event):
+	visualize_keyboard_square('^', KEY_CARET, img_lower)
+
+def on_ampersand_press(event):
+	visualize_keyboard_square('&', KEY_AMPERSAND, img_lower)
+
+def on_asterisk_press(event):
+	visualize_keyboard_square('*', KEY_ASTERISK, img_lower)
+
+def on_leftparen_press(event):
+	visualize_keyboard_square('(', KEY_LEFTPAREN, img_lower)
+
+def on_rightparen_press(event):
+	visualize_keyboard_square(')', KEY_RIGHTPAREN, img_lower)
 
 def on_q_press(event):
-	visualize_keyboard_square('q', KEY_Q, "primary")
+	visualize_keyboard_square('q', KEY_Q, img_primary)
 
 def on_w_press(event):
-	visualize_keyboard_square('w', KEY_W, "primary")
+	visualize_keyboard_square('w', KEY_W, img_primary)
 
 def on_e_press(event):
-	visualize_keyboard_square('e', KEY_E, "primary")
+	visualize_keyboard_square('e', KEY_E, img_primary)
 
 def on_r_press(event):
-	visualize_keyboard_square('r', KEY_R, "primary")
+	visualize_keyboard_square('r', KEY_R, img_primary)
 
 def on_t_press(event):
-	visualize_keyboard_square('t', KEY_T, "primary")
+	visualize_keyboard_square('t', KEY_T, img_primary)
 
 def on_y_press(event):
-	visualize_keyboard_square('y', KEY_Y, "primary")
+	visualize_keyboard_square('y', KEY_Y, img_primary)
 
 def on_u_press(event):
-	visualize_keyboard_square('u', KEY_U, "primary")
+	visualize_keyboard_square('u', KEY_U, img_primary)
 
 def on_i_press(event):
-	visualize_keyboard_square('i', KEY_I, "primary")
+	visualize_keyboard_square('i', KEY_I, img_primary)
 
 def on_o_press(event):
-	visualize_keyboard_square('o', KEY_O, "primary")
+	visualize_keyboard_square('o', KEY_O, img_primary)
 
 def on_p_press(event):
-	visualize_keyboard_square('p', KEY_P, "primary")
+	visualize_keyboard_square('p', KEY_P, img_primary)
+
+def on_1_press(event):
+	visualize_keyboard_square('1', KEY_1, img_raise)
+
+def on_2_press(event):
+	visualize_keyboard_square('2', KEY_2, img_raise)
+
+def on_3_press(event):
+	visualize_keyboard_square('3', KEY_3, img_raise)
+
+def on_4_press(event):
+	visualize_keyboard_square('4', KEY_4, img_raise)
+
+def on_5_press(event):
+	visualize_keyboard_square('5', KEY_5, img_raise)
+
+def on_6_press(event):
+	visualize_keyboard_square('6', KEY_6, img_raise)
+
+def on_7_press(event):
+	visualize_keyboard_square('7', KEY_7, img_raise)
+
+def on_8_press(event):
+	visualize_keyboard_square('8', KEY_8, img_raise)
+
+def on_9_press(event):
+	visualize_keyboard_square('9', KEY_9, img_raise)
+
+def on_0_press(event):
+	visualize_keyboard_square('0', KEY_0, img_raise)
+
+def on_F1_press(event):
+	visualize_keyboard_square("F1", KEY_F1, img_both)
+
+def on_F2_press(event):
+	visualize_keyboard_square("F2", KEY_F2, img_both)
+
+def on_F3_press(event):
+	visualize_keyboard_square("F3", KEY_F3, img_both)
+
+def on_F4_press(event):
+	visualize_keyboard_square("F4", KEY_F4, img_both)
+
+def on_F5_press(event):
+	visualize_keyboard_square("F5", KEY_F5, img_both)
+
+def on_F6_press(event):
+	visualize_keyboard_square("F6", KEY_F6, img_both)
+
+def on_F7_press(event):
+	visualize_keyboard_square("F7", KEY_F7, img_both)
+
+def on_F8_press(event):
+	visualize_keyboard_square("F8", KEY_F8, img_both)
+
+def on_F9_press(event):
+	visualize_keyboard_square("F9", KEY_F9, img_both)
+
+def on_F10_press(event):
+	visualize_keyboard_square("F10", KEY_F10, img_both)
 
 # ====================================================================
+
+def on_escape_press(event):
+	visualize_keyboard_square("Escape", KEY_ESCAPE, img_lower)
+
+def on_underscore_press(event):
+	visualize_keyboard_square('_', KEY_UNDERSCORE, img_lower)
+
+def on_plussign_press(event):
+	visualize_keyboard_square('+', KEY_PLUSSIGN, img_lower)
+
+def on_leftcurly_press(event):
+	visualize_keyboard_square('{', KEY_LEFTCURLY, img_lower)
+
+def on_rightcurly_press(event):
+	visualize_keyboard_square('}', KEY_RIGHTCURLY, img_lower)
 
 def on_a_press(event):
-	visualize_keyboard_square('a', KEY_A, "primary")
+	visualize_keyboard_square('a', KEY_A, img_primary)
 
 def on_s_press(event):
-	visualize_keyboard_square('s', KEY_S, "primary")
+	visualize_keyboard_square('s', KEY_S, img_primary)
 
 def on_d_press(event):
-	visualize_keyboard_square('d', KEY_D, "primary")
+	visualize_keyboard_square('d', KEY_D, img_primary)
 
 def on_f_press(event):
-	visualize_keyboard_square('f', KEY_F, "primary")
+	visualize_keyboard_square('f', KEY_F, img_primary)
 
 def on_g_press(event):
-	visualize_keyboard_square('g', KEY_G, "primary")
+	visualize_keyboard_square('g', KEY_G, img_primary)
 
 def on_h_press(event):
-	visualize_keyboard_square('h', KEY_H, "primary")
+	visualize_keyboard_square('h', KEY_H, img_primary)
 
 def on_j_press(event):
-	visualize_keyboard_square('j', KEY_J, "primary")
+	visualize_keyboard_square('j', KEY_J, img_primary)
 
 def on_k_press(event):
-	visualize_keyboard_square('k', KEY_K, "primary")
+	visualize_keyboard_square('k', KEY_K, img_primary)
 
 def on_l_press(event):
-	visualize_keyboard_square('l', KEY_L, "primary")
+	visualize_keyboard_square('l', KEY_L, img_primary)
 
 def on_semicolon_press(event):
-	visualize_keyboard_square("semicolon", KEY_SEMICOLON, "primary")
+	visualize_keyboard_square(';', KEY_SEMICOLON, img_primary)
+
+def on_tab_press(event):
+	visualize_keyboard_square("tab", KEY_TAB, img_raise)
+
+def on_leftarrow_press(event):
+	visualize_keyboard_square("left arrow", KEY_LEFTARROW, img_raise)
+
+def on_downarrow_press(event):
+	visualize_keyboard_square("down arrow", KEY_DOWNARROW, img_raise)
+
+def on_uparrow_press(event):
+	visualize_keyboard_square("up arrow", KEY_UPARROW, img_raise)
+
+def on_rightarrow_press(event):
+	visualize_keyboard_square("right arrow", KEY_RIGHTARROW, img_raise)
+
+def on_hyphen_press(event):
+	visualize_keyboard_square('-', KEY_HYPHEN, img_raise)
+
+def on_equalssign_press(event):
+	visualize_keyboard_square('=', KEY_EQUALSSIGN, img_raise)
+
+def on_leftbracket_press(event):
+	visualize_keyboard_square('[', KEY_LEFTBRACKET, img_raise)
+
+def on_rightbracket_press(event):
+	visualize_keyboard_square(']', KEY_RIGHTBRACKET, img_raise)
+
+def on_F11_press(event):
+	visualize_keyboard_square("F11", KEY_F11, img_both)
+
+def on_F12_press(event):
+	visualize_keyboard_square("F12", KEY_F12, img_both)
 
 # ====================================================================
 
+def on_capslock_press(event):
+	visualize_keyboard_square("CAPSLOCK", KEY_CAPSLOCK, img_lower)
+
+def on_tilde_press(event):
+	visualize_keyboard_square('~', KEY_TILDE, img_lower)
+
+def on_pipe_press(event):
+	visualize_keyboard_square('|', KEY_PIPE, img_lower)
+
+def on_doublequote_press(event):
+	visualize_keyboard_square('"', KEY_DOUBLEQUOTE, img_lower)
+
+def on_return_press(event):
+	visualize_keyboard_square("Return", KEY_RETURN, img_lower)
+
 def on_z_press(event):
-	visualize_keyboard_square('z', KEY_Z, "primary")
+	visualize_keyboard_square('z', KEY_Z, img_primary)
 
 def on_x_press(event):
-	visualize_keyboard_square('x', KEY_X, "primary")
+	visualize_keyboard_square('x', KEY_X, img_primary)
 
 def on_c_press(event):
-	visualize_keyboard_square('c', KEY_C, "primary")
+	visualize_keyboard_square('c', KEY_C, img_primary)
 
 def on_v_press(event):
-	visualize_keyboard_square('v', KEY_V, "primary")
+	visualize_keyboard_square('v', KEY_V, img_primary)
 
 def on_b_press(event):
-	visualize_keyboard_square('b', KEY_B, "primary")
+	visualize_keyboard_square('b', KEY_B, img_primary)
 
 def on_n_press(event):
-	visualize_keyboard_square('n', KEY_N, "primary")
+	visualize_keyboard_square('n', KEY_N, img_primary)
 
 def on_m_press(event):
-	visualize_keyboard_square('m', KEY_M, "primary")
+	visualize_keyboard_square('m', KEY_M, img_primary)
 
 def on_comma_press(event):
-	visualize_keyboard_square(',', KEY_COMMA, "primary")
+	visualize_keyboard_square(',', KEY_COMMA, img_primary)
 
 def on_period_press(event):
-	visualize_keyboard_square('.', KEY_PERIOD, "primary")
+	visualize_keyboard_square('.', KEY_PERIOD, img_primary)
 
 def on_forwardslash_press(event):
-	visualize_keyboard_square('/', KEY_FORWARDSLASH, "primary")
+	visualize_keyboard_square('/', KEY_FORWARDSLASH, img_primary)
+
+def on_backtick_press(event):
+	visualize_keyboard_square('`', KEY_BACKTICK, img_raise)
+
+def on_super_press(event):
+	visualize_keyboard_square("SUPER", KEY_SUPER, img_raise)
+
+def on_command_press(event):
+	visualize_keyboard_square("COMMAND", KEY_SUPER, img_raise)
+
+def on_windows_press(event):
+	visualize_keyboard_square("WINDOWS", KEY_SUPER, img_raise)
+
+def on_leftalt_press(event):
+	visualize_keyboard_square("LEFT ALT", KEY_LEFTALT, img_raise)
+
+def on_backslash_press(event):
+	visualize_keyboard_square('\\', KEY_BACKSLASH, img_raise)
+
+def on_singlequote_press(event):
+	visualize_keyboard_square('\'', KEY_SINGLEQUOTE, img_raise)
 
 # ====================================================================
 
 def on_control_press(event):
-	visualize_keyboard_square("control", KEY_CONTROL, "primary")
-
-def on_lower_press(event):
-	visualize_keyboard_polygon("lower", KEY_LOWER, "lower")
+	visualize_keyboard_square("control", KEY_CONTROL, img_primary)
 
 def on_space_press(event):
-	visualize_keyboard_polygon("space", KEY_SPACE, "primary")
+	visualize_keyboard_polygon("space", KEY_SPACE, img_primary)
 
 def on_backspace_press(event):
-	visualize_keyboard_polygon("backspace", KEY_BACKSPACE, "primary")
+	visualize_keyboard_polygon("backspace", KEY_BACKSPACE, img_primary)
 
-def on_raise_press(event):
-	visualize_keyboard_polygon("raise", KEY_RAISE, "raise")
+def on_return_press(event):
+	visualize_keyboard_polygon("return", KEY_RETURN, img_lower)
 
 def on_shift_press(event):
-	visualize_keyboard_square("shift", KEY_SHIFT, "primary")
+	visualize_keyboard_square("shift", KEY_SHIFT, img_primary)
 
-def on_both_press(event):
-	visualize_keyboard_polygon("both", KEY_RAISE, "both")
-	# visualize_keyboard_polygon("", KEY_LOWER, "both")
+def on_delete_press(event):
+	visualize_keyboard_square("delete", KEY_DELETE, img_lower)
 
 def main():
-	reset_canvas("primary")
+	reset_canvas(img_primary)
 	listen_for_keyboard()
 
 	root.mainloop()
 
 root = tk.Tk() 
 window_properties()
-
-top_right_dimension = root.winfo_screenwidth()
-
-root.geometry("+{}+{}".format(top_right_dimension, OFFSET_DOWN))
+window_size()
 
 c = tk.Canvas(root, height=WINDOW_HEIGHT, width=WINDOW_WIDTH)
 
