@@ -1,17 +1,18 @@
 # References:
-# https://effbot.org/tkinterbook/tkinter-events-and-bindings.htm
-# https://www.tcl.tk/man/tcl8.6/TkCmd/keysyms.htm
+# 	https://effbot.org/tkinterbook/tkinter-events-and-bindings.htm
+# 	https://www.tcl.tk/man/tcl8.6/TkCmd/keysyms.htm
+# 	http://zetcode.com/tkinter/drawing/
 
 import tkinter as tk
 from PIL import ImageTk
 from sys import platform
 
 if platform == "linux" or platform == "linux2":
-	OS_CODE = "linux"
+	OS_TYPE = "linux"
 elif platform == "darwin":
-	OS_CODE = "macOS"
+	OS_TYPE = "macOS"
 else:
-	OS_CODE = "windows"
+	OS_TYPE = "windows"
 
 WINDOW_HEIGHT = 210
 WINDOW_WIDTH = 510
@@ -97,7 +98,7 @@ def lower_layer():
 	root.bind('"', on_doublequote_press)
 	root.bind("<Return>", on_return_press)
 	
-	if OS_CODE is "linux" or OS_CODE is "windows":
+	if OS_TYPE is "linux" or OS_TYPE is "windows":
 		root.bind("<Delete>", on_delete_press)
 
 def primary_layer():
@@ -169,7 +170,7 @@ def primary_layer():
 
 	root.bind("<space>", on_space_press)
 	
-	if OS_CODE is "linux" or OS_CODE is "windows":
+	if OS_TYPE is "linux" or OS_TYPE is "windows":
 		root.bind("<BackSpace>", on_backspace_press)
 	else:
 		root.bind("<Delete>", on_backspace_press)
@@ -200,14 +201,14 @@ def raise_layer():
 
 	root.bind('`', on_backtick_press)
 
-	if OS_CODE is "linux":
+	if OS_TYPE is "linux":
 		root.bind("<Super_L>", on_super_press)
-	elif OS_CODE is "macOS":
+	elif OS_TYPE is "macOS":
 		root.bind("<Command>", on_command_press)
 	else:
 		root.bind("<Win_L>", on_windows_press)
 
-	if OS_CODE is "linux" or OS_CODE is "windows":
+	if OS_TYPE is "linux" or OS_TYPE is "windows":
 		root.bind("<Alt_L>", on_leftalt_press)
 	# else:
 	# 	root.bind("<>", on_raise_press)
