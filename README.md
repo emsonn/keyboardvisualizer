@@ -1,5 +1,5 @@
 # keybordvisualizer
-A constant on-screen tool to learn a new keyboard + layout (Minidox)
+A constant on-screen tool to learn a new keyboard/layout (Minidox)
 
 This project has mainly been tested on Ubuntu - issues might occur on Windows and MacOS.
 
