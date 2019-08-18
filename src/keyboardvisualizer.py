@@ -56,7 +56,7 @@ KEY_FORWARDSLASH = KEY_DOUBLEQUOTE = KEY_SINGLEQUOTE = (465, 101, 503, 140)
 
 KEY_CONTROL = (105, 136, 142, 174)
 
-# Bottom left, top left, top right, bottom right
+# Bottom left point, top left point, top right point, bottom right point
 KEY_LOWER = ((144, 175), (154, 138), (191, 148), (181, 185))
 KEY_SPACE = ((182, 186), (217, 127), (250, 146), (216, 205))
 
@@ -64,37 +64,13 @@ KEY_BACKSPACE =  KEY_RETURN = ((262, 145), (295, 126), (329, 185), (296, 205))
 KEY_RAISE = ((331, 184), (321, 148), (358, 138), (368, 174))
 KEY_SHIFT = KEY_DELETE = (370, 135, 407, 173)
 
-root = tk.Tk() 
-root.title("Keyboard Visualizer")
-root.attributes("-topmost", True)
-root.focus_set()
-
-top_right_dimension = root.winfo_screenwidth()
-
-root.geometry("+{}+{}".format(top_right_dimension, OFFSET_DOWN))
-
-c = tk.Canvas(root, height=WINDOW_HEIGHT, width=WINDOW_WIDTH)
-
-img_primary_path = "../images/minidox-primary-layer.png"
-img_primary = ImageTk.PhotoImage(file=img_primary_path)
-
-img_lower_path = "../images/minidox-lower-layer.png"
-img_lower = ImageTk.PhotoImage(file=img_lower_path)
-
-img_raise_path = "../images/minidox-raise-layer.png"
-img_raise = ImageTk.PhotoImage(file=img_raise_path)
-
-img_both_path = "../images/minidox-BOTH-layer.png"
-img_both = ImageTk.PhotoImage(file=img_both_path)
-
-def listen_for_keyboard():
-	lower_layer()
-	primary_layer()
-	raise_layer()
-	both_layer()
+def window_properties():
+	root.title("Keyboard Visualizer")
+	root.attributes("-topmost", True)
+	root.focus_set()
 
 def lower_layer():
-	root.bind('!', on_lower_press)
+	root.bind('!', on_exclamation_press)
 	root.bind('@', on_lower_press)
 	root.bind('#', on_lower_press)
 	root.bind('$', on_lower_press)
@@ -251,17 +227,30 @@ def both_layer():
 	root.bind("<F11>", on_both_press)
 	root.bind("<F12>", on_both_press)
 
+def listen_for_keyboard():
+	lower_layer()
+	primary_layer()
+	raise_layer()
+	both_layer()
+
+def print_key(key):
+	print("Key pressed: " + key)
+
 def reset_canvas(layer):
 	c.delete("all")
 	
 	if layer is "raise":
-		c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img_raise)
+		c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, 
+					   image=img_raise)
 	elif layer is "lower":
-		c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img_lower)
+		c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT,
+					   image=img_lower)
 	elif layer is "both":
-		c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img_both)
+		c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT,
+					   image=img_both)
 	else:
-		c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT, image=img_primary)
+		c.create_image(INSIDE_OFFSET_WIDTH, INSIDE_OFFSET_HEIGHT,
+					   image=img_primary)
 	
 	c.pack()
 
@@ -275,9 +264,6 @@ def red_letter_polygon(key_coords):
 							key_coords[2], key_coords[3],
 							fill=DEFAULT_COLOR)
 
-def print_key(key):
-	print("Key pressed: " + key)
-
 def visualize_keyboard_square(key, keycode, layer):
 	print_key(key)
 	reset_canvas(layer)
@@ -287,6 +273,9 @@ def visualize_keyboard_polygon(key, keycode, layer):
 	print_key(key)
 	reset_canvas(layer)
 	red_letter_polygon(keycode)
+
+def on_exclamation_press(event):
+	visualize_keyboard_square('!', KEY_EXCLAMATION, "lower")
 
 def on_q_press(event):
 	visualize_keyboard_square('q', KEY_Q, "primary")
@@ -318,7 +307,7 @@ def on_o_press(event):
 def on_p_press(event):
 	visualize_keyboard_square('p', KEY_P, "primary")
 
-# ================================================
+# ====================================================================
 
 def on_a_press(event):
 	visualize_keyboard_square('a', KEY_A, "primary")
@@ -350,7 +339,7 @@ def on_l_press(event):
 def on_semicolon_press(event):
 	visualize_keyboard_square("semicolon", KEY_SEMICOLON, "primary")
 
-# ================================================
+# ====================================================================
 
 def on_z_press(event):
 	visualize_keyboard_square('z', KEY_Z, "primary")
@@ -382,7 +371,7 @@ def on_period_press(event):
 def on_forwardslash_press(event):
 	visualize_keyboard_square('/', KEY_FORWARDSLASH, "primary")
 
-# ================================================
+# ====================================================================
 
 def on_control_press(event):
 	visualize_keyboard_square("control", KEY_CONTROL, "primary")
@@ -411,5 +400,26 @@ def main():
 	listen_for_keyboard()
 
 	root.mainloop()
+
+root = tk.Tk() 
+window_properties()
+
+top_right_dimension = root.winfo_screenwidth()
+
+root.geometry("+{}+{}".format(top_right_dimension, OFFSET_DOWN))
+
+c = tk.Canvas(root, height=WINDOW_HEIGHT, width=WINDOW_WIDTH)
+
+img_primary_path = "../images/minidox-primary-layer.png"
+img_primary = ImageTk.PhotoImage(file=img_primary_path)
+
+img_lower_path = "../images/minidox-lower-layer.png"
+img_lower = ImageTk.PhotoImage(file=img_lower_path)
+
+img_raise_path = "../images/minidox-raise-layer.png"
+img_raise = ImageTk.PhotoImage(file=img_raise_path)
+
+img_both_path = "../images/minidox-BOTH-layer.png"
+img_both = ImageTk.PhotoImage(file=img_both_path)
 
 main()
