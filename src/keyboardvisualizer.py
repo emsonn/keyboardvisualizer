@@ -15,11 +15,12 @@ def window_properties():
 
 def window_size():
 	top_right_dimension = root.winfo_screenwidth()
-	root.geometry("+{}+{}".format(top_right_dimension, kbc.OFFSET_DOWN))
+	root.geometry("+{}+{}".format(top_right_dimension, 
+				  kbc.BACKGROUND_IMAGE_OFFSET_DOWN))
 
-def print_key(key):
-	print("Key pressed: " + key)
-
+# Removes canvas of all shaded boxes before (possibly) changing layers
+# and drawing a new one.  Causes window to flicker sometimes on redraw (?)
+# REDO functionality if you update with key press/key release instead.
 def reset_canvas(layer):
 	c.delete("all")
 	
@@ -39,29 +40,26 @@ def reset_canvas(layer):
 				   kbc.BACKGROUND_IMAGE_OFFSET_HEIGHT, image=layer)	
 	c.pack()
 
-def red_letter_box(key_coords):
-	return c.create_rectangle(key_coords[1], key_coords[2], 
+def highlight_square_key(key_coords):
+	c.create_rectangle(key_coords[1], key_coords[2], 
 							  key_coords[3], key_coords[4], 
 							  fill=kbc.DEFAULT_COLOR)
 
-def red_letter_polygon(key_coords):
-	return c.create_polygon(key_coords[1], key_coords[2],
+def highlight_polygon_key(key_coords):
+	c.create_polygon(key_coords[1], key_coords[2],
 							key_coords[3], key_coords[4],
 							fill=kbc.DEFAULT_COLOR)
 
 def visualize_keyboard_square(key, keycode, layer):
-	print_key(key)
 	reset_canvas(layer)
-	red_letter_box(keycode)
+	highlight_square_key(keycode)
 
 def visualize_keyboard_polygon(key, keycode, layer):
-	print_key(key)
 	reset_canvas(layer)
-	red_letter_polygon(keycode)
+	highlight_polygon_key(keycode)
 
-def test_function(event):
-	key = event.Key
-	key = key.lower()
+def process_keyboard_input(event):
+	key = event.Key.lower()
 	dict = kbc.all_keys
 
 	if key not in dict:
@@ -73,20 +71,16 @@ def test_function(event):
 
 	if key_shape is kbc.SQUARE:
 		visualize_keyboard_square(key, key_location, key_layer)
-
 	else:
 		visualize_keyboard_polygon(key, key_location, key_layer)
-			
-	if event.Key == "Shift_R":
-		hookman.cancel() 
-		sys.exit(0)
 
 def main():
 	reset_canvas(img_primary)
-	hookman.KeyDown = test_function
+	hookman.KeyDown = process_keyboard_input
 	root.mainloop()
 
 
+# Initializes actual window for the program.
 root = tk.Tk() 
 window_properties()
 window_size()
@@ -99,8 +93,9 @@ img_lower = ImageTk.PhotoImage(file=kbc.IMG_LOWER_PATH)
 img_raise = ImageTk.PhotoImage(file=kbc.IMG_RAISE_PATH)
 img_both = ImageTk.PhotoImage(file=kbc.IMG_BOTH_PATH)
 
+# Sets up and starts global keyboard listener
 hookman = pyxhook.HookManager()
 hookman.HookKeyboard()
-
 hookman.start()
+
 main()
