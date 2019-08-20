@@ -6,6 +6,8 @@
 import tkinter as tk
 from PIL import ImageTk
 import keyboardconstants as kbc
+import pyxhook
+import time
 
 def window_properties():
 	root.title("Keyboard Visualizer")
@@ -171,7 +173,7 @@ def both_layer():
 	root.bind("<F11>", on_F11_press)
 	root.bind("<F12>", on_F12_press)
 
-def listen_for_keyboard():
+def listen_for_keyboard(event):
 	lower_layer()
 	primary_layer()
 	raise_layer()
@@ -497,9 +499,20 @@ def on_delete_press(event):
 
 def main():
 	reset_canvas(img_primary)
-	listen_for_keyboard()
+	# listen_for_keyboard()
+	
+	hookman = pyxhook.HookManager()
+	hookman.HookKeyboard()
+	hookman.start()
+	running = True
+	hookman.KeyDown = listen_for_keyboard
+
+	while running:
+		time.sleep(0.1)
 
 	root.mainloop()
+	hookman.cancel()
+
 
 
 root = tk.Tk() 
