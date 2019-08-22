@@ -18,7 +18,21 @@ be sure to keep the pyxhook file within the same directory as keyboardvisualizer
 ```
 python3 keyboardvisualizer.py
 ```  
-<br><br><br><br><br>
+<br>
+
+The program will start with an empty keyboard and highlight each individual key press.  The keypress remains highlighted until the next key is pressed.  Your last pressed key will always be highlighted (this is due to how I implemented pyxhook). 
+
+<br>
+
+![Image of program](https://raw.githubusercontent.com/emsonn/keyboardvisualizer/master/images/screenshot2.png)
+<br>
+Here, the 'a' key is pressed, which is in the default layer.
+<br>
+
+On the numbers layer, the Super/Win key is the key with the flower on it.  This can be changed by drawing over the appropriate layers (minidox-raise-layer.png and minidox-BOTH-layer-png) 
+
+
+<br><br><br>
 
 #### Future notes
 PyHook is a Windows library, so pyxhook was used here.  There are some differences between these two libraries as well as how tkinter functions, which makes supporting Windows more challenging than I thought it would have been.
