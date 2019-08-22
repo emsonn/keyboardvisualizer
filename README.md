@@ -12,7 +12,7 @@ To see what each layer has, hold down the layer modifier(s) and then hit any key
 ```
 pip install pillow
 ```
-be sure to keep the pyxhook file within the same directory as keyboardvisualizer.py
+Be sure to keep the pyxhook file within the same directory as keyboardvisualizer.py, as this records key presses.
 
 ### To run: 
 ```
